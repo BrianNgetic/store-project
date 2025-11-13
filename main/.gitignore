@@ -1,0 +1,13 @@
+# Java
+*.class
+*.jar
+*.war
+*.log
+
+# VS Code
+.vscode/
+.history/
+
+# OS
+*.DS_Store
+Thumbs.db
