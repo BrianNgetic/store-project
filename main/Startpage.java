@@ -23,19 +23,35 @@ static String MainMenuOptions = """
                 Enter your choice: 
 
         """;
- public static void main(String[] args) {
+
+
+//  public static void main(String[] args) {
+public static void StartMenu(){
         System.out.print(MainMenuOptions);
-   
+
+        
+
+        // int choice; 
         Scanner sc = new Scanner(System.in);
-         sc.nextInt();
+        int choice = sc.nextInt();
 
          sc.close();
+
+         switch (choice) {
+                case 1:
+
+                        
+                        break;
+         
+                default:
+                        break;
+         }
    
    
-    }
+    
     
 
-Scanner sc = new Scanner(System.in);
-int input = sc.nextInt();
-
+        }
 }
+
+

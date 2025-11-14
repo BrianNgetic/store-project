@@ -1,6 +1,7 @@
 package main;
 
 import java.io.*;
+import java.util.ArrayList;
 
 import FileAccessorFunctions.GetInput;
 
@@ -54,10 +55,11 @@ public class Main {
                     //prompt the user for password and store it inthe user.password
                     System.out.println("Enter a Password");
 
-                    user.Password = Integer.parseInt((UserInfo.readLine()));// get the  to input and add password
+                    user.Password = (UserInfo.readLine());// get the  to input and add password
                    try( BufferedWriter FirstUser = new BufferedWriter(new FileWriter("data/userData.txt", true))){
                             FirstUser.write(user.Email +"," + user.Password); //add email and password to list
                             //email, password
+                            FirstUser.newLine();
                    }
                    catch(Exception e){
                         e.printStackTrace();
@@ -71,9 +73,9 @@ public class Main {
                     String[] parts = line.split(","); // each line now loos lile        
 
                     String Email = parts[0]; //get the email
-                    int password = Integer.parseInt(parts[1]); //convert the string to int
+                    String password = parts[1]; //password as a string, 
                     
-                    user.Password = Integer.parseInt(UserInfo.readLine()); //get the input frm the user to compare
+                    user.Password = UserInfo.readLine(); //get the input frm the user to compare
 
                     if(Email.equals(user.Email)) {//check if the email is in the file 
                             //if it is, check if the password matches
@@ -84,7 +86,7 @@ public class Main {
                                 System.out.println("Sorry, That Password is incorrect, try again");
                                 count++;
                                 System.out.println(" you have " + (4-count)+ "attempts left");
-                                 user.Password = Integer.parseInt(UserInfo.readLine()); //get input again
+                                 user.Password = UserInfo.readLine(); //get input again
                                 
                                 //going to pause this for now..to come back to later;
                                 // if(count >4 ){
@@ -98,11 +100,30 @@ public class Main {
                              
 
                     }
+                    else{ //if the file is not empty but the amail isnt there
 
+                    
+                            System.out.println("Enter a Password");
+
+                                user.Password = UserInfo.readLine();// get the  to input and add password
+                            try( BufferedWriter AddedUser = new BufferedWriter(new FileWriter("data/userData.txt", true))){
+                                        AddedUser.write(user.Email +"," + user.Password); //add email and password to list
+                                        //email, password
+                                        AddedUser.newLine();
+                            }
+                            catch(Exception e){
+                                    e.printStackTrace();
+                             }
+                        }
+
+
+                                                                                    
+                                                      
 
                 }
+                    
 
-
+                
 
                 ReadFromFile.close();
             } catch(Exception e){
@@ -116,7 +137,7 @@ public class Main {
             }
 
 
-            else if (typeuser == "2"){
+            else if (typeuser == "2"){ //admin priviledges
                     
             }
             else{
