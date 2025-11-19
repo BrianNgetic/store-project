@@ -1,0 +1,11 @@
+shirt,12.99,20,0.10,L,blue
+jeans,39.99,15,0.20,M,black
+jacket,59.99,8,0.15,XL,red
+socks,4.99,50,0.05,OneSize,white
+hoodie,29.99,12,0.10,L,gray
+tshirt,9.99,35,0.05,M,green
+shorts,19.99,18,0.10,L,navy
+scarf,7.49,25,0.05,OneSize,beige
+dress,44.99,10,0.15,S,pink
+cap,14.99,40,0.05,Adjustable,black
+
