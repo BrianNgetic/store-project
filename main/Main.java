@@ -1,9 +1,11 @@
 package main;
 
 import java.io.*;
+import java.util.*;
 // import java.lang.*;
 
 import FileAccessorFunctions.GetInput;
+import Exceptions.FileExceptions;
 
 //note to self
 
@@ -44,9 +46,9 @@ public class Main {
 
                             outerblock: {
                             System.out.println("Enter your Email");
-                            BufferedReader UserInfo = GetInput.createReader();
+                            
                             Customer user = new Customer(); //create new instance of customer
-                            user.Email = (UserInfo.readLine()); //assin the email to the input of user
+                            user.Email = (reader.readLine()); //assin the email to the input of user
                             //we need to check if the email already exists
                             //if it does, we ask for the password and check if they are same
                             //if it doesnt we ask for a passsword that will now be linked to this email.
@@ -57,82 +59,65 @@ public class Main {
                                  ReadFromFile = new BufferedReader(new FileReader("data/userData.txt"));
                                 // String  line = ReadFromFile.readLine();
                                 //outerloop:
-                                String line = ReadFromFile.readLine();
-                                System.out.println("DEBUGGING: " + line);
-
+                                String line ;
                                 //if file is empty
-                                if(("data/userData.txt").length() == 0){
-                                    
-                                    //if the file is empty, hence no previous customers
-                                    //we need to add the email and ask  for a password to also add
-                                    //since we already have the emial, ask him  a good password then add both of them together
-                                    
-                                    
-                                    //prompt the user for password and store it inthe user.password
-                                    //this is the first customer
-                                    System.out.println("DEBUGGING:: NEW USER FILE EMPTY");
-                                    System.out.println("Welcome  " + user.Email  );
-                                    System.out.println("Create a Password");
-                                    
-                                    user.Password =((UserInfo.readLine()));// get the  to input and add password
-                                    try( BufferedWriter FirstUser = new BufferedWriter(new FileWriter("data/userData.txt", true))){
-                                        FirstUser.write(user.Email +"," + user.Password); //add email and password to list
-                                        //email, password
-                                        FirstUser.newLine();
-                                    }
-                                    catch(Exception e){
-                                        e.getMessage();
-                                    }
-                            
-                                    System.out.println("Your information was Successfully saved");
-                                    CustomerMenu.showMenu(); //show the cuustomer meny
-                                    
-                                } 
-                                else //file isnt  empty
-                                {
-                            
-                            
-                                    
+                                
+                                boolean founduser = false;
+                                String Email;
+                                String password;
                                     //iiterate till the file is over.
-                                    while ((line  = ReadFromFile.readLine()) != null){
+                                
+                                 while ((line  = ReadFromFile.readLine()) != null)
+                                {
                                         
-                                          System.out.println("DEBUGGING: " + line);
+                                       
+                                        if (line.trim().isEmpty()) continue;
+                                        
+
                                         
                                         String[] parts = line.split(","); // each line now loos lile
                                         
-                                        String Email = parts[0]; //get the email
-                                        String password =(parts[1]); //get the password as  a string
+                                         Email = parts[0]; //get the email
+                                         password =(parts[1]); //get the password as  a string
                                                                     //int wont work because we want the password to have special
                                                                     //characters as well
 
                                         
                                         if(Email.equals(user.Email)) {
-                                            //check if the email is in the file
-                                            //if it is, check if the password matches
-                                            
-                                            //for debugging
-                                            System.out.println("Welcome returning user");
-                                            System.out.println("Enter Your Password");
+                                        founduser = true;
+                                        user.Password = password;
+                                        break;
+                                        }
                                         
-                                            user.Password =((UserInfo.readLine())); //get the input frm the user to compare
-                                            
-                                            int count = 0; //keeps track of the numeber of sign in attempts
-                                           
-                                
-                                             if(user.Password.equals(password)){
-                                                //if it does match. Show them the main menu.
-                                                System.out.println("Your information was Successfully saved");
-                                                CustomerMenu.showMenu(); //show the cuustomer meny
-                                            
-                                            }
-                                            else{
+
+                                        // System.out.print(founduser);
+                                }
+                                if(founduser == true) {//the user exists
+                                        //ask for password;
+                                        System.out.println("WElcome back Valued Customer");
+                                        System.out.println("Enter your password");
+            
+                                        String returningUserPassword= reader.readLine();
+
+                                        if(returningUserPassword.equals(user.Password)){ //password is same
+                                            System.out.println("Here are our updated store menu options: ");
+                                            CustomerMenu.showMenu();
+                                        }
+            
+                                        else{
+                                            int count  = 3;
                                                  do { //dont match, 
                                                 
                                                         System.out.println("Sorry, That Password is incorrect, try again");
-                                                        count++;
-                                                        System.out.println(" you have " + (4-count)+ "attempts left");
-                                                        if(4-count <= 0) break  outerblock;
-                                                        user.Password = (UserInfo.readLine()); //get input again
+                                                
+                                                        System.out.println(" you have " + (count)+ "attempts left");
+                                                        count--;
+                                                        returningUserPassword = reader.readLine();
+                                                        if(count <= 0) {
+                                                            System.out.println("You have exceeded the number of tries");
+                                                            break  outerblock;
+                                                        } 
+                                                      
                                                         
                                                         //going to pause this for now..to come back to later;
                                                         // if(count >4 ){
@@ -140,46 +125,38 @@ public class Main {
                                                         //     break outerloop; // go back to men
                                                         // }
                                                         
-                                                 }while(!(user.Password.equals(password)));
+                                                 }while(returningUserPassword.equals(user.Password));
                                            }
                                               
+                                           
                                             
-                                            
-                                        }
-                                        else //file isnt empty but the email isnt on the file, new user
-                                        {
-                                                
-                                                System.out.println("Welcome to our site");
-                                                System.out.println("Create a password");
-                                                user.Password = UserInfo.readLine();
+                                            // scanner.close();
+                                    } else if(founduser == false){
+                                        System.out.println("Weclcome to our site");
+                                        System.out.println("Create  a password");
+                                        
+                                        String newUserPassword = reader.readLine();
 
-
-                                                //if the file isnt empty but the email isnt in the database(new user)
-                                                    //append the email and password
-                                                try( BufferedWriter newUser = new BufferedWriter(new FileWriter("data/userData.txt", true))){
-                                                    newUser.write(user.Email +"," + user.Password); //add email and password to list
+                                         try( BufferedWriter newUser = new BufferedWriter(new FileWriter("data/userData.txt", true))){
+                                                    newUser.write(user.Email +"," + newUserPassword ); //add email and password to list
                                                     //email, password
                                                     newUser.newLine();
                                                     System.out.println("Your information has been successfully saved"); //save info
                                                     CustomerMenu.showMenu(); //show screen
                                                 }
-                                                catch(Exception e){
-                                                    e.getMessage();
+                                        catch(Exception e){
+                                                    e.printStackTrace();
                                                 }
-                                        }
-
                                         
+                                       
                                     }
-                                }
-                                
-                               
-                                
-                               
-                            }
-                            catch(Exception e){
+                                       
+                                        
+                            }catch(Exception e){
                                 e.getMessage();
                             }
                             finally{
+                                
                                 ReadFromFile.close(); //close file. 
                             }
                            
