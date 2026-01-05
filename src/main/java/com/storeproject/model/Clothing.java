@@ -16,25 +16,19 @@ import lombok.*;
 @Entity
 @Table(name = "clothing")
 public class Clothing  extends  Product{
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    @column(name = "prod_id");
-    @NotNull
-    private int id;
+    
 
-    @column(name = "prod_type")
+    @Column(name = "prod_type")
     private string type;
 
-    @column(name = "prod_price")
-    private double price;
 
-    @column(name = "prod_stock")
+    @Column(name = "prod_stock")
     private int stock;
 
-    @column(name = "size")
+    @Column(name = "size")
     private String size;
     
-    @column (name = "color")
+    @Column (name = "color")
     private String color;
   
 

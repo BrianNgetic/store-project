@@ -21,21 +21,26 @@ import lombok.*;
 @Table(name = "electronics")
 public class Electronics extends  Product{
 
-    @ID
-    @GeneratedValue(strategy= = GenerationType.AUTO)
-    @column(name = "prod_id")
-    private int id;
 
-    @column
-    boolean  warrantyElible;
-    int warrantyPeriod;
-    int batteryLevel;
-    double productVersion;
+
+    @Column(name =  "warranty_elegible")
+    private boolean  warrantyElible;
+
+    @Column(name = "warranty_period")
+    private int warrantyPeriod;
+
+    @Column(name = "product_version")
+    private double productVersion;
+
+    @Column(name = "prod_type")
+    private String product_type;
+
+
+     private static int updatedProductVersion;
+     //to come back to 
+
+    if()
     
-    private static int updatedProductVersion;
-
-
-
     
 
     void updateversion(){

@@ -3,16 +3,28 @@ package src.main.java.com.storeproject.model;
 import java.io.*;
 import java.lang.*;
 // import users.string;
+import java.time.*;
 
+import jakarta.persistence.Embeddable;
 
 public class Food  extends Product{
     
     //variables
-    char[] expirationDate;
+    @Column(name = "expiry_date")
+    LocalDate expirationDate;
+
+    @Embeddable
     class Nutrition{
+        @Column(name  = "protein")
         int protein;
+
+        @Column(name = "carbs")
         int carbs;
+        
+        @Column(name = "fat")
         int fat;
+
+        @Column(name = "calories")
         double calories ;
     }
 
@@ -20,38 +32,6 @@ public class Food  extends Product{
     //mutators
    // nutrutition accessor and modifier fuction to be added soon
 
-
-   
-       public void  ReadfromElectronicFile(){
-        
-   
-        try
-        {
-           BufferedReader ReadfromElectronicsFile  = new BufferedReader(new FileReader("data/Electronics.txt"));
-            String line;
-            if((line  = ReadfromElectronicsFile.readLine()) != null){
-                String[] parts = line.split(",");
-
-                name = parts[0];
-                price = Double.parseDouble(parts[1]);
-                stock = Integer.parseInt(parts[2]);
-                discount = Double.parseDouble(parts[3]);
-                expirationDate =  parts[4].toCharArray(); ///02022005 becomes [0,2,0,2,2,0,0,5]
-                Nutrition foodItem = new Nutrition(); //instantiate the class and assin memory of size nutrition hence the new
-                foodItem.protein = Integer.parseInt(parts[5]);
-                foodItem.carbs = Integer.parseInt(parts[6]);
-                foodItem.fat = Integer.parseInt(parts[7]);
-                foodItem.calories =  ((foodItem.protein * 4) + (foodItem.carbs * 4) + (foodItem.fat * 9));
-                 
-                
-
-
-            }
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-       }
     
 
 
@@ -62,21 +42,6 @@ public class Food  extends Product{
     }
     
     String getexpirationDate(){
-
-
-        StringBuilder  expiry =  new StringBuilder();
-
-        for(int i = 0; i < expirationDate.length; i++){
-            expiry.append(expirationDate[i]);
-            if(i == 1 || i== 3){ // [0,2,0,2,2,0,0,5] becomes [0,2,/,0,2,/,2,0,0,5]
-                expiry.append("/");
-            }
-            
-
-
-            
-        }
-        return expiry.toString();
    
 
     }
