@@ -1,10 +1,16 @@
-package src.main.java.com.storeproject.controller;
+package com.storeproject.controller;
+
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 
 @RestController
-@PostMapping("/product")
+@RequestMapping("/product") // to add products
 public class ProductController {
-    
+    @Autowired
+    private Addproductservice addproductservice;
 }
 
 @GetMapping("/product/{id}")
-public class 
+public class  

@@ -1,5 +1,5 @@
 
-package src.main.java.com.storeproject.model.Exceptions;
+package com.storeproject.model.Exceptions;
 
 public class  ProductNotFoundException extends RuntimeException
  {

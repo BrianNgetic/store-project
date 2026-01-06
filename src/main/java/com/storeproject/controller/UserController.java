@@ -1,4 +1,4 @@
-package src.main.java.com.storeproject.controller;
+package com.storeproject.controller;
 
 public class UserController {
     

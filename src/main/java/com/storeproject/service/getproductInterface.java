@@ -1,5 +1,7 @@
-package src.main.java.com.storeproject.service;
-import src.main.java.com.model.product;
+package com.storeproject.service;
+import com.storeproject.model.Product;
+import java.util.*;
+
 
 public interface getproductInterface {
     List<Product>  getAllProducts();

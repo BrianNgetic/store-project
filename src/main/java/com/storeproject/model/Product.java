@@ -1,4 +1,4 @@
-package src.main.java.com.storeproject.model;
+package com.storeproject.model;
 
 
 import jakarta.persistence.*;
@@ -9,7 +9,7 @@ public abstract class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = prod_id)
+    @Column(name = "prod_id")
     protected  Long id;
     
   

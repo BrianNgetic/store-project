@@ -1,4 +1,4 @@
-package src.main.java.com.storeproject.config;
+package com.storeproject.config;
 
 
 public class DatabaseConfig {

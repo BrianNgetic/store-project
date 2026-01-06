@@ -1,7 +1,7 @@
-package src.main.java.com.storeproject;
+package com.storeproject;
 
 
-import java.lang.*;
+
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,0 +1,6 @@
+package src.main.java.com.storeproject.model.interfaces;
+
+public class  OutOfStockException extends RuntimeException
+ {
+    
+}

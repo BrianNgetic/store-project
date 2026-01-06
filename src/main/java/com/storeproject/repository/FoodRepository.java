@@ -1,5 +1,11 @@
-package src.main.java.com.storeproject.repository;
+package com.storeproject.repository;
 
-public class FoodRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import jakarta.persistence.*;
+import com.storeproject.model.Product;
+
+@Repository
+public class FoodRepository implements JpaRepository<Product, Long> {
     
 }

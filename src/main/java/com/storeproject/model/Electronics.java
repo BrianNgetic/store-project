@@ -1,22 +1,19 @@
 
-package src.main.java.com.storeproject.model;
+package com.storeproject.model;
 
 import java.io.*;
 // import java.lang.*;
 
 import javax.annotation.processing.Generated;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.StoredProcedureParameter;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
+
 
 @Entity
 
 @Getter
-@Settter 
+@Setter 
 @NoArgsConstructor
 @Table(name = "electronics")
 public class Electronics extends  Product{
@@ -39,7 +36,6 @@ public class Electronics extends  Product{
      private static int updatedProductVersion;
      //to come back to 
 
-    if()
     
     
 
@@ -67,23 +63,33 @@ public class Electronics extends  Product{
     //     // TODO
     // }
 
-    @Override
+    
     String getname() {
         // TODO
         return name;
     }
 
-    @Override
+    
     double getprice() {
         // TODO
         return price;
 
     }
 
-    @Override
+
     int getstock() {
         // TODO
         return stock;
+    }
+
+    @Override
+    public boolean isInStock() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void validate() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
 

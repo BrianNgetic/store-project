@@ -1,4 +1,4 @@
-package src.main.java.com.storeproject.model;
+package com.storeproject.model;
 
 public class Customer {
   public  String Email;

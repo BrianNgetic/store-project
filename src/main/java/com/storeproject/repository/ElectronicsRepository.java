@@ -1,5 +1,13 @@
-package src.main.java.com.storeproject.repository;
+package com.storeproject.repository;
 
-public class ElectronicsRepository extends 
-    
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import jakarta.persistence.*;
+import com.storeproject.model.Product;
+
+@Repository
+public class ElectronicsRepository implements JpaRepository <Product, Long>{
+
 }
+    
+

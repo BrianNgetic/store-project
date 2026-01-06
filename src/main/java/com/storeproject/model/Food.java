@@ -1,17 +1,25 @@
-package src.main.java.com.storeproject.model;
+package com.storeproject.model;
 
-import java.io.*;
-import java.lang.*;
-// import users.string;
 import java.time.*;
 
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.*;
 
 public class Food  extends Product{
     
     //variables
     @Column(name = "expiry_date")
     LocalDate expirationDate;
+
+    @Override
+    public boolean isInStock() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void validate() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
     @Embeddable
     class Nutrition{
@@ -41,10 +49,10 @@ public class Food  extends Product{
         return true; ///to be changed
     }
     
-    String getexpirationDate(){
+    // String getexpirationDate(){
    
 
-    }
+    // }
 
     Nutrition getnutritionInfo(){ // to be changed
 
@@ -70,19 +78,19 @@ public class Food  extends Product{
     //     return total;
     // }
 
-    @Override
+ 
     String getname() {
         // TODO
         return name; 
     }
 
-    @Override
+  
     double getprice() {
         // TODO
         return price;
     }
 
-    @Override
+
     int getstock() {
         // TODO
         return stock;

@@ -1,14 +1,8 @@
 
-package src.main.java.com.storeproject.model;
-import java.beans.ConstructorProperties;
-import java.io.BufferedReader;
-import java.io.FileReader;
+package com.storeproject.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
 import lombok.*;
 
 
@@ -19,7 +13,7 @@ public class Clothing  extends  Product{
     
 
     @Column(name = "prod_type")
-    private string type;
+    private String type;
 
 
     @Column(name = "prod_stock")
@@ -51,21 +45,31 @@ public class Clothing  extends  Product{
     //     return total;
     // }
 
+    // @Override
+    // String getname() {
+    //     // TODO
+    //     return name;
+    // }
+
+    // @Override
+    // double getprice() {
+    //     // TODO
+    //     return price;
+    // // }
+
+    // / @Override
+    // int getstock() {
+    //     // TODO
+    //     return stock;
+    // }
+
     @Override
-    String getname() {
-        // TODO
-        return name;
+    public boolean isInStock() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    double getprice() {
-        // TODO
-        return price;
-    }
-
-    @Override
-    int getstock() {
-        // TODO
-        return stock;
+    public void validate() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

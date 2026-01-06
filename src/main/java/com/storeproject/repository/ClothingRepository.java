@@ -1,9 +1,13 @@
-package src.main.java.com.storeproject.repository;
+package com.storeproject.repository;
 
-import  org.springframework.data.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import jakarta.persistence.*;
+import com.storeproject.model.Product;
 
 
 @Repository
-public class ClothingRepository extends jparepository <Product, long>{
+public  class ClothingRepository implements  JpaRepository <Product, Long>{
     
 }
