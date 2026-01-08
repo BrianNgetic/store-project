@@ -3,11 +3,21 @@ package com.storeproject.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import jakarta.persistence.*;
+// import jakarta.persistence.*;
 import com.storeproject.model.Product;
+import java.util.List;
+
 
 
 @Repository
-public class ProductRepository implements JpaRepository<Product, Long> {
+public interface ProductRepository extends  JpaRepository <Product, Long>{
+
     
+     List<Product> findByCategory(String category);
+
+     
+
 }
+    
+
+

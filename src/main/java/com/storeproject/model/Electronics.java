@@ -4,7 +4,7 @@ package com.storeproject.model;
 import java.io.*;
 // import java.lang.*;
 
-import javax.annotation.processing.Generated;
+// import javax.annotation.processing.Generated;
 
 import jakarta.persistence.*;
 import lombok.*;

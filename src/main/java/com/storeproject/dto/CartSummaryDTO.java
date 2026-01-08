@@ -1,4 +1,4 @@
-package src.main.java.com.storeproject.dto;
+package com.storeproject.dto;
 
 
 public class CartSummaryDTO {
