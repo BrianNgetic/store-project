@@ -4,7 +4,12 @@ import java.time.*;
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.*;
+import lombok.*;
 
+@Entity
+@Setter
+@Getter
+@NoArgsConstructor
 public class Food  extends Product{
     
     //variables
@@ -40,39 +45,33 @@ public class Food  extends Product{
 
 
     //accessors
-    boolean  isExpired(){
+    // boolean  isExpired(){
 
-        return true; ///to be changed
-    }
+    //     return true; ///to be added to service
+    // }
     
-    // String getexpirationDate(){
+    // // String getexpirationDate(){
    
 
-    // }
-
-    Nutrition getnutritionInfo(){ // to be changed
-
-        return null ;
-    }
-
+    // // }
 
     // @Override
-    // void applydiscount() {
-    //     // TODO
+    // // void applydiscount() {
+    // //     // TODO
       
-    // }
+    // // }
 
-    // @Override
-    // void updatestock() {
-    //     // TODO
+    // // @Override
+    // // void updatestock() {
+    // //     // TODO
 
-    // }
+    // // }
 
-    // @Override
-    // double calcTotal() {
-    //     // TODO
-    //     return total;
-    // }
+    // // @Override
+    // // double calcTotal() {
+    // //     // TODO
+    // //     return total;
+    // // }
 
  
     

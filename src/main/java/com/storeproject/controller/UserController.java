@@ -22,20 +22,20 @@ public class UserController {
 
     // private final DeleteProductServiceInterfaceImplementation deleteProductServiceInterfaceImplementation;
 
-    private  AddUserServiceInterfaceImplementation addUserServiceInterfaceImplimentation;
-    private DeleteUserServiceInterfaceImplementation deleteUserServiceInterfaceImplentation;
+    private  AddUserServiceInterfaceImplementation addUserServiceInterfaceImplementation;
+    private DeleteUserServiceInterfaceImplementation deleteUserServiceInterfaceImplementation;
     private   ViewUserServiceInterfaceImplementation  viewUserServiceInterfaceImplementation;
     
     // protected  UserRepository userRepository;
 
     public UserController
     (
-        AddUserServiceInterfaceImplementation addUserServiceInterfaceImplimentation,
-     DeleteUserServiceInterfaceImplementation deleteUserServiceInterfaceImplentation,
+        AddUserServiceInterfaceImplementation addUserServiceInterfaceImplementation,
+     DeleteUserServiceInterfaceImplementation deleteUserServiceInterfaceimplementation,
        ViewUserServiceInterfaceImplementation  viewUserServiceInterfaceImplementation
    ){
-        this.addUserServiceInterfaceImplimentation = addUserServiceInterfaceImplimentation;
-        this.deleteUserServiceInterfaceImplentation = deleteUserServiceInterfaceImplentation;
+        this.addUserServiceInterfaceImplementation = addUserServiceInterfaceImplementation;
+        this.deleteUserServiceInterfaceImplementation = deleteUserServiceInterfaceImplementation;
         this.viewUserServiceInterfaceImplementation  = viewUserServiceInterfaceImplementation;
   
     }
@@ -43,7 +43,7 @@ public class UserController {
     @PostMapping("/save-user")
     public ResponseEntity<?> CreateUser(@RequestBody User user) {
         
-        User createdUser = addUserServiceInterfaceImplimentation.addUser(user);
+        User createdUser = addUserServiceInterfaceImplementation.addUser(user);
         
         return  new ResponseEntity<>(createdUser, HttpStatus.CREATED);
 
@@ -52,9 +52,9 @@ public class UserController {
 
     @DeleteMapping("/delete-user/{id}")
     public ResponseEntity<?> DeleteUser(@PathVariable Long id){
-        deleteUserServiceInterfaceImplentation.deleteUser(id);
+        deleteUserServiceInterfaceImplementation.deleteUser(id);
 
-        return ResponseEntity.ok("User suceessfully deleted");
+        return ResponseEntity.ok("User sucessfully deleted");
     }
 
     @GetMapping("/user/{id}")

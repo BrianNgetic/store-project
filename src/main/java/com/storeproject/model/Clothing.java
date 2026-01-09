@@ -7,7 +7,11 @@ import lombok.*;
 
 
 
+
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 @Table(name = "clothing")
 public class Clothing  extends  Product{
     
@@ -23,43 +27,6 @@ public class Clothing  extends  Product{
     @Column (name = "color")
     private String color;
   
-
-
-    
-
-    // @Override
-    // void applydiscount() {v ////this is business logic to be handled with our 
-    //     // TODO
-    // }
-
-    // @Override
-    // void updatestock() {
-    //     // TODO
-    // }
-
-  //  @Override
-    // double calcTotal() {
-    //     // TODO
-    //     return total;
-    // }
-
-    // @Override
-    // String getname() {
-    //     // TODO
-    //     return name;
-    // }
-
-    // @Override
-    // double getprice() {
-    //     // TODO
-    //     return price;
-    // // }
-
-    // / @Override
-    // int getstock() {
-    //     // TODO
-    //     return stock;
-    // }
 
 
     @Override

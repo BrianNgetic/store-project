@@ -17,7 +17,7 @@ import com.storeproject.service.product.*;
 // import com.storeproject.service.product.AddProductServiceInterfaceImplementation;
 // import com.storeproject.service.product.DeleteProductServiceInterfaceImplementation;
 // import com.storeproject.service.product.UpdateProductServiceInterfaceImplementation;
-// import com.storeproject.service.product.ViewProductServiceInterfaceImplimentation;
+// import com.storeproject.service.product.ViewProductServiceInterfaceImplementation;
 
 // import jakarta.ws.rs.Path;
 
@@ -26,20 +26,20 @@ import com.storeproject.service.product.*;
 
 
 @RestController //indicated this class handled web requests
-@RequestMapping("/product") //maps all the  incomgin requests to their handler methods
+@RequestMapping("/product") //maps all the  incoming requests to their handler methods
 public class ProductController { 
 
     
     private final  AddProductServiceInterfaceImplementation addProductServiceInterfaceImplementation;
     private final  DeleteProductServiceInterfaceImplementation deleteProductServiceInterfaceImplementation;
     private final  UpdateProductServiceInterfaceImplementation  updateProductServiceInterfaceImplementation;
-    private final ViewProductServiceInterfaceImplimentation viewProductServiceInterfaceImplimentation;
+    private final ViewProductServiceInterfaceImplementation viewProductServiceInterfaceImplimentation;
 
     public ProductController(
         AddProductServiceInterfaceImplementation addProductServiceInterfaceImplementation,
         DeleteProductServiceInterfaceImplementation deleteProductServiceInterfaceImplementation,
         UpdateProductServiceInterfaceImplementation updateProductServiceInterfaceImplementation,
-        ViewProductServiceInterfaceImplimentation veiwProductServiceInterfaceImplimentation){
+        ViewProductServiceInterfaceImplementation veiwProductServiceInterfaceImplimentation){
             this.addProductServiceInterfaceImplementation = addProductServiceInterfaceImplementation;
             this.deleteProductServiceInterfaceImplementation = deleteProductServiceInterfaceImplementation;
             this.updateProductServiceInterfaceImplementation =  updateProductServiceInterfaceImplementation;        
@@ -47,7 +47,7 @@ public class ProductController {
         }
     @PostMapping("/add-product") //create and add a product
     public ResponseEntity<?> CreateProduct(@RequestBody Product product){
-        //requestbody convets the http request body to java objects that we can use
+        //requestbody converts the http request body to java objects that we can use
 
     
          addProductServiceInterfaceImplementation.addProduct(product);

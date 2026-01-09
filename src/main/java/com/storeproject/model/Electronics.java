@@ -32,7 +32,7 @@ public class Electronics extends  Product{
     @Column(name = "prod_type")
     private String product_type;
 
-
+    @Transient
      private static int updatedProductVersion;
      //to come back to 
 
@@ -49,21 +49,6 @@ public class Electronics extends  Product{
         return warrantyElible;// only true if it was less than 30 days ago. 
     }
 
-    // @Override
-    // void applydiscount() {
-    //     // TODO
-    // }
-
-    // @Override
-    // void updatestock() {
-    //     // TODO
-    // }
-
-    // @Override
-    // double calcTotal() {
-    //     return total;
-    //     // TODO
-    // }
 
 
 

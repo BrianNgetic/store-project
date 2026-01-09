@@ -2,16 +2,16 @@ package com.storeproject.service.product;
 
 import com.storeproject.model.Product;
 import com.storeproject.repository.ProductRepository;
-import com.storeproject.repository.UserRepository;
+// import com.storeproject.repository.UserRepository;
 
 import java.util.*;
 
-public class ViewProductServiceInterfaceImplimentation implements ViewProductServiceInterface {
+public class ViewProductServiceInterfaceImplementation implements ViewProductServiceInterface {
 
 
     private final  ProductRepository productRepository;
 
-    public ViewProductServiceInterfaceImplimentation(ProductRepository productRepository){
+    public ViewProductServiceInterfaceImplementation(ProductRepository productRepository){
         this.productRepository = productRepository;
     }
     @Override

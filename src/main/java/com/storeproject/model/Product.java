@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.*;
 import jakarta.validation.constraints.*;
 
-@Entity
+
 @MappedSuperclass
 @Getter
 @Setter
