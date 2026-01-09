@@ -11,10 +11,6 @@ public class Food  extends Product{
     @Column(name = "expiry_date")
     LocalDate expirationDate;
 
-    @Override
-    public boolean isInStock() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 
     @Override
     public void validate() {
@@ -79,20 +75,5 @@ public class Food  extends Product{
     // }
 
  
-    String getname() {
-        // TODO
-        return name; 
-    }
-
-  
-    double getprice() {
-        // TODO
-        return price;
-    }
-
-
-    int getstock() {
-        // TODO
-        return stock;
-    }
+    
 }

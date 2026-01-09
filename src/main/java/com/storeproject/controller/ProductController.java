@@ -4,19 +4,20 @@ package com.storeproject.controller;
 
 import org.springframework.http.ResponseEntity;
 
-import java.net.ResponseCache;
+// import java.net.ResponseCache;
 import java.util.*;
 
-import org.springframework.boot.autoconfigure.web.servlet.HttpEncodingAutoConfiguration;
+// import org.springframework.boot.autoconfigure.web.servlet.HttpEncodingAutoConfiguration;
 // import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import com.storeproject.model.*;
-import com.storeproject.service.AddProductServiceInterfaceImplementation;
-import com.storeproject.service.DeleteProductServiceInterfaceImplementation;
-import com.storeproject.service.UpdateProductServiceInterfaceImplementation;
-import com.storeproject.service.ViewProductServiceInterfaceImplimentation;
+import com.storeproject.service.product.*;
+// import com.storeproject.service.product.AddProductServiceInterfaceImplementation;
+// import com.storeproject.service.product.DeleteProductServiceInterfaceImplementation;
+// import com.storeproject.service.product.UpdateProductServiceInterfaceImplementation;
+// import com.storeproject.service.product.ViewProductServiceInterfaceImplimentation;
 
 // import jakarta.ws.rs.Path;
 

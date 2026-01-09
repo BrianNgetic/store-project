@@ -16,8 +16,6 @@ public class Clothing  extends  Product{
     private String type;
 
 
-    @Column(name = "prod_stock")
-    private int stock;
 
     @Column(name = "size")
     private String size;
@@ -63,13 +61,9 @@ public class Clothing  extends  Product{
     //     return stock;
     // }
 
-    @Override
-    public boolean isInStock() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 
     @Override
     public void validate() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
     }
 }

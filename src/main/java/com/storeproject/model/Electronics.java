@@ -38,11 +38,13 @@ public class Electronics extends  Product{
 
     
     
-
+    @Transient
     void updateversion(){
         //update the product version
         productVersion = updatedProductVersion;
     }
+
+    @Transient
     boolean isunderWarranty(){
         return warrantyElible;// only true if it was less than 30 days ago. 
     }
@@ -63,29 +65,7 @@ public class Electronics extends  Product{
     //     // TODO
     // }
 
-    
-    String getname() {
-        // TODO
-        return name;
-    }
 
-    
-    double getprice() {
-        // TODO
-        return price;
-
-    }
-
-
-    int getstock() {
-        // TODO
-        return stock;
-    }
-
-    @Override
-    public boolean isInStock() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 
     @Override
     public void validate() {

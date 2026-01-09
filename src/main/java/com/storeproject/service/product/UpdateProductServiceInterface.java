@@ -1,4 +1,4 @@
-package com.storeproject.service;
+package com.storeproject.service.product;
 
 import com.storeproject.model.Product;
 

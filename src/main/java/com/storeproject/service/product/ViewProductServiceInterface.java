@@ -1,4 +1,4 @@
-package com.storeproject.service;
+package com.storeproject.service.product;
 import java.util.List;
 
 import com.storeproject.model.Product;

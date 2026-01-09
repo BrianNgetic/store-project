@@ -1,8 +1,9 @@
-package com.storeproject.service;
+package com.storeproject.service.product;
 
 import com.storeproject.model.Product;
 import com.storeproject.repository.ProductRepository;
-import com.storeproject.repository.userRepository;
+import com.storeproject.repository.UserRepository;
+
 import java.util.*;
 
 public class ViewProductServiceInterfaceImplimentation implements ViewProductServiceInterface {

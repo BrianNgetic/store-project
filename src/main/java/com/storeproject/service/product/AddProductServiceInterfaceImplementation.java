@@ -1,7 +1,8 @@
-package com.storeproject.service;
+package com.storeproject.service.product;
 
 import com.storeproject.model.Product;
 import com.storeproject.repository.*;
+
 // import java.util.*;
 import org.springframework.stereotype.Service; //for service
 // import org.springframework.beans.factory.annotation.*; //for autowired 
