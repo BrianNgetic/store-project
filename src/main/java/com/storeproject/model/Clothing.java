@@ -26,7 +26,9 @@ public class Clothing  extends  Product{
     
     @Column (name = "color")
     private String color;
-  
+   
+
+    
 
 
     @Override

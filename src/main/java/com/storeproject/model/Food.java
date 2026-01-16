@@ -2,9 +2,12 @@ package com.storeproject.model;
 
 import java.time.*;
 
-import jakarta.persistence.Embeddable;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.*;
 import lombok.*;
+// import com.storeproject.model.FoodNutrition;
+//same "folder" so i dont have to import it
+
 
 @Entity
 @Setter
@@ -12,6 +15,10 @@ import lombok.*;
 @NoArgsConstructor
 public class Food  extends Product{
     
+    @Embedded
+    @NonNull
+    private   FoodNutrition foodNutrition;
+
     //variables
     @Column(name = "expiry_date")
     LocalDate expirationDate;
@@ -19,24 +26,11 @@ public class Food  extends Product{
 
     @Override
     public void validate() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    //     throw new UnsupportedOperationException("Not supported yet.");
+    // 
     }
 
-    @Embeddable
-    class Nutrition{
-        @Column(name  = "protein")
-        int protein;
-
-        @Column(name = "carbs")
-        int carbs;
-        
-        @Column(name = "fat")
-        int fat;
-
-        @Column(name = "calories")
-        double calories ;
-    }
-
+    
                 //functions
     //mutators
    // nutrutition accessor and modifier fuction to be added soon
