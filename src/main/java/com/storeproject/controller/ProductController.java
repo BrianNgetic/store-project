@@ -12,6 +12,7 @@ import java.util.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import com.storeproject.dto.CreatedProduct;
 import com.storeproject.model.*;
 import com.storeproject.service.product.*;
 // import com.storeproject.service.product.AddProductServiceInterfaceImplementation;
@@ -30,63 +31,61 @@ import com.storeproject.service.product.*;
 public class ProductController { 
 
     
-    private final  AddProductServiceInterfaceImplementation addProductServiceInterfaceImplementation;
-    private final  DeleteProductServiceInterfaceImplementation deleteProductServiceInterfaceImplementation;
-    private final  UpdateProductServiceInterfaceImplementation  updateProductServiceInterfaceImplementation;
-    private final ViewProductServiceInterfaceImplementation viewProductServiceInterfaceImplimentation;
-
-    public ProductController(
-        AddProductServiceInterfaceImplementation addProductServiceInterfaceImplementation,
-        DeleteProductServiceInterfaceImplementation deleteProductServiceInterfaceImplementation,
-        UpdateProductServiceInterfaceImplementation updateProductServiceInterfaceImplementation,
-        ViewProductServiceInterfaceImplementation veiwProductServiceInterfaceImplimentation){
-            this.addProductServiceInterfaceImplementation = addProductServiceInterfaceImplementation;
-            this.deleteProductServiceInterfaceImplementation = deleteProductServiceInterfaceImplementation;
-            this.updateProductServiceInterfaceImplementation =  updateProductServiceInterfaceImplementation;        
-            this.viewProductServiceInterfaceImplimentation = veiwProductServiceInterfaceImplimentation;
+    public final ProductService productService;
+    public ProductController(ProductService  productService){
+        this.productService = productService;
+        
         }
     @PostMapping("/add-product") //create and add a product
-    public ResponseEntity<?> CreateProduct(@RequestBody Product product){
+    public ResponseEntity<?> CreateProduct(@RequestBody CreatedProduct  product) throws Exception{
         //requestbody converts the http request body to java objects that we can use
 
-    
-         addProductServiceInterfaceImplementation.addProduct(product);
+
+         productService.addProduct(product);
+   
          return ResponseEntity.status(HttpStatus.CREATED).body(product);
     }
 
     @PutMapping("/update-product/{id}") //update a product
-    public ResponseEntity<?> UpdateProduct(@PathVariable Long id, @RequestBody Product product){
+    public ResponseEntity<?> UpdateProduct(@PathVariable Long id, @RequestBody CreatedProduct product){
                 //pathvariable binds the requested paremeter of the handler method to the url making it dynamic 
-
-          updateProductServiceInterfaceImplementation.UpdateProduct(id, product);
+            try{
+            productService.updatedProduct(id, product);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
 
           return ResponseEntity.status(HttpStatus.CREATED).body(product);
 
 
     
     }
-    @GetMapping("/product/{id}") // get requests
-    public ResponseEntity<Product> viewById(Long id){
+    @GetMapping("/id/{id}") // get requests
+    public ResponseEntity<Product> viewById(@PathVariable Long id) throws Exception{
 
-
-        return ResponseEntity.ok(viewProductServiceInterfaceImplimentation.viewById(id));
-    
+      
+      return ResponseEntity.ok(productService.viewProductById(id));
     }
 
 
-    @GetMapping("/product/{category}") //view by category
-    public ResponseEntity<List<Product>> viewByCategory(String category){
-             return ResponseEntity.ok(viewProductServiceInterfaceImplimentation.viewByCategory(category));
+    @GetMapping("/category/{category}") //view by category
+    public ResponseEntity<List<Product>> viewByCategory(@PathVariable String category) throws Exception{
+             return ResponseEntity.ok(productService.viewByCategory(category));
     }
 
-    @GetMapping("/products/allProducts")
+    @GetMapping("/allProducts")
     public ResponseEntity<List<Product>> viewAllProducts(){
-           return ResponseEntity.ok(viewProductServiceInterfaceImplimentation.viewAllProducts());
+           return ResponseEntity.ok(productService.viewAllProducts());
     }
 
-    @DeleteMapping("/products-product/{id}")
-    public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
-        deleteProductServiceInterfaceImplementation.deleteProduct(id);
+    @DeleteMapping("/delete-product/{id}")
+    public ResponseEntity<String> deleteProduct( @PathVariable Long id) {
+      try{
+             productService.deleteProduct(id);
+      }
+      catch(Exception e){
+        e.printStackTrace();
+      }
         return ResponseEntity.ok("Succesfully Deleted product with id"  + id);
     }
 

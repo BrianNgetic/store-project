@@ -1,6 +1,7 @@
 package com.storeproject.service.product;
 import com.storeproject.dto.*;
 import com.storeproject.model.*;
+import com.storeproject.model.Exceptions.ProductNotFoundException;
 
 import java.util.*;
 
@@ -15,25 +16,25 @@ public class ProductService {
         protected ClothingRepository clothingRepository;
         protected ElectronicsRepository electronicsRepository;
         protected FoodRepository foodRepository;
-        protected ProductRepository productRepository;
+       
 
 
         public ProductService(
              ClothingRepository clothingRepository,
              ElectronicsRepository electronicsRepository,
-             FoodRepository foodRepository,
-             ProductRepository productRepository
+             FoodRepository foodRepository
+           
         ){
             this.clothingRepository = clothingRepository;
             this.electronicsRepository = electronicsRepository;
             this.foodRepository = foodRepository;
-            this.productRepository = productRepository;
+          
 
         }
 
         
 
-        public void addProduct(CreatedProduct req) throws Exception {
+        public Product addProduct(CreatedProduct req) throws Exception {
             String prod_category = req.getCategory();
             switch(prod_category){
                 case "Electronic":
@@ -48,8 +49,7 @@ public class ProductService {
                     e.setWarrantyPeriod(req.getWarrantyPeriod());
                     e.setProduct_type(req.getProductType());
                     e.setProductVersion(req.getProductVersion());
-                    electronicsRepository.save(e);
-                    break;
+                    return  electronicsRepository.save(e);
                 case "Food":
                     Food f = new Food();
                     f.setName(req.getName());
@@ -66,18 +66,17 @@ public class ProductService {
                     nutrition.setFat(dto.getFat());
                     nutrition.setCalories(dto.getCalories());
                     }
-                    break;
+                    return foodRepository.save(f);
                 case "Clothing":
                     Clothing c = new Clothing();
                     c.setCategory(prod_category);
-                    c.setName(req.getName());
                     c.setPrice(req.getPrice());
                     c.setStock(req.getPrice());
                     c.setType(req.getClothType());
                     c.setSize(req.getClothSize());
                     c.setColor(req.getClothColor());
-                    clothingRepository.save(c);
-                    break;
+                     return   clothingRepository.save(c);
+                    
                 default:
                     throw new invalidProductCategory();
 
@@ -86,30 +85,34 @@ public class ProductService {
 
         }
 
-        public void deleteProduct(CreatedProduct req, Long id) throws Exception{
-               String category = req.getCategory();
-               switch(category){
-                    case "Electronic":
-                        electronicsRepository.deleteById(id);
-                        break;
-                    case "Food":
-                        foodRepository.deleteById(id);
-                        break;
-                    case "Clothing":
-                        clothingRepository.deleteById(id);
-                        break;
-                    default:
-                        throw new  invalidProductCategory();
-         }       
+        public void deleteProduct(Long id) throws Exception{
+                if (electronicsRepository.existsById(id)) {
+                     electronicsRepository.deleteById(id);
+                         return;
+                 }
+
+                 if (foodRepository.existsById(id)) {
+                         foodRepository.deleteById(id);
+                      return;
+                     }
+
+                if (clothingRepository.existsById(id)) {
+                         clothingRepository.deleteById(id);
+                    return;
+                }
+
+            throw new ProductNotFoundException();
+             
         }
 
         //do update product in a second
-        public void  updatedProduct(Long Prod_id,  CreatedProduct req) throws Exception{
+        public Product  updatedProduct(Long Prod_id,  CreatedProduct req) throws Exception{
             String Category = req.getCategory();
 
             switch(Category){
                 case "Electronic":
-                    Electronics e  = new Electronics();
+                    Electronics e  =  electronicsRepository.findById(Prod_id)
+                                    .orElseThrow(productNotFoundException::new);
                     e.setId(Prod_id);
                     e.setName(req.getName());
                     e.setPrice(req.getPrice());
@@ -118,22 +121,22 @@ public class ProductService {
                     e.setWarrantyPeriod(req.getWarrantyPeriod());
                     e.setProductVersion(req.getProductVersion());
                     e.setProduct_type(req.getProductType());
-                    electronicsRepository.save(e);
-                    break;
-                case "clothing":    
-                    Clothing c = new Clothing();
+                   return  electronicsRepository.save(e);
+                    
+                case "Clothing":    
+                    Clothing c = clothingRepository.findById(Prod_id).orElseThrow(productNotFoundException::new);
                     c.setId(Prod_id);
-                     c.setName(req.getName());
+                    
                     c.setPrice(req.getPrice());
                     c.setStock(req.getStock());
                     c.setType(req.getProductType());
                     c.setSize(req.getClothSize());
                     c.setColor(req.getClothColor());
-                    clothingRepository.save(c);
-                    break;
+                    return clothingRepository.save(c);
+                  
 
                 case "Food":
-                    Food f = new Food();
+                    Food f = foodRepository.findById(Prod_id).orElseThrow(productNotFoundException::new);
                     f.setId(Prod_id);
                     f.setName(req.getName());
                     f.setPrice(req.getPrice());
@@ -146,24 +149,56 @@ public class ProductService {
                      nutrition.setFat(dto.getFat());
                      nutrition.setCalories(dto.getCalories());
                      f.setFoodNutrition(nutrition);
-                     foodRepository.save(f);
-                     break;
+                     return foodRepository.save(f);
+                    
                 default:
                     throw new  invalidProductCategory();
             }
 
         }
 
-        public Product viewProductById(Long Id){
-            return productRepository.getReferenceById(Id);
+        public Product viewProductById(Long Id) throws Exception{
+
+            Optional<Electronics> electronics  = electronicsRepository.findById(Id);
+            if(electronics.isPresent()){ return electronics.get();}
+
+             Optional<Clothing> clothing  = clothingRepository.findById(Id);
+            if(clothing.isPresent()){ return clothing.get();}
+
+
+            Optional<Food> food  = foodRepository.findById(Id);
+            if(food.isPresent()){ return food.get();}
+
+        
+            throw new productNotFoundException();
         }
 
-        public List<Product> viewByCategory(String category){
-            return productRepository.findByCategory(category);
-        }
+      public List<Product> viewByCategory(String category) throws Exception{
+            List<Product> results = new ArrayList<>();
+            switch(category){
+                case "Food":
+                    results.addAll(foodRepository.findAll());
+                    break;
+                case "Electronic":
+                    results.addAll(electronicsRepository.findAll());
+                    break;
+                case "Clothing":
+                    results.addAll(clothingRepository.findAll());
+                    break;
+                default:
+                    throw new  invalidProductCategory();
+            }
+           
+             return results;
+    }
+
 
         public List<Product> viewAllProducts(){
-            return productRepository.findAll();
+            List<Product> results = new ArrayList<>();
+            results.addAll(electronicsRepository.findAll());
+            results.addAll(foodRepository.findAll());
+            results.addAll(clothingRepository.findAll());
+     return results;
         }
 
 }

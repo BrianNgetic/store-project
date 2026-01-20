@@ -10,7 +10,7 @@ public class NutritionDto{
    private  int protein;
    private  int carbs;
    private  int fat;
-   private  double calories;
+   private  int calories;
 
 
 }

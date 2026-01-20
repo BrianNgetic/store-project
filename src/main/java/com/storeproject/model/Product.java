@@ -16,23 +16,26 @@ public abstract class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "prod_id", nullable = false)
+    @Column(name = "prodId", nullable = false)
     protected  Long id;
     
   
-    @Column (name = "prod_name" , nullable = false)
-    protected  String name;
+     @Column (name = "prodCategory", nullable = false)
+    protected String category;
+     
+    @Column (name = "prodType" ,nullable = false)
+    protected String type;
+  
 
-    @Column (name = "prod_price", nullable = false)
+    @Column (name = "prodPrice", nullable = false)
     @Min(value = 0, message =  "Price can not be a negative")
     protected double  price;
 
-    @Column (name = "prod_stock" ,nullable = false)
+    @Column (name = "prodStock" ,nullable = false)
     @Min(value = 0, message =  "Stock can not be a negative")
     protected int stock;
 
-    @Column (name = "prod_category", nullable = false)
-    protected String category;
+   
 
     public   boolean isInStock(){
         if(stock >= 1){

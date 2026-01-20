@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository; //for jparepositor
 import org.springframework.stereotype.Repository; //for repository
 // import jakarta.persistence.*; //for the  columns  stuff
 import com.storeproject.model.User; //for the entity
-import java.util.List;
+// import java.util.List;
 
 
 @Repository

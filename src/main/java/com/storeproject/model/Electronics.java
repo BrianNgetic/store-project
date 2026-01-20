@@ -19,18 +19,19 @@ import lombok.*;
 public class Electronics extends  Product{
 
 
+    @Column (name = "prodName" , nullable = false)
+    protected  String name;
 
-    @Column(name =  "warranty_elegible")
+    @Column(name =  "warrantyElegible")
     private boolean  warrantyElible;
 
-    @Column(name = "warranty_period")
+    @Column(name = "warrantyPeriod")
     private int warrantyPeriod;
 
-    @Column(name = "product_version")
+    @Column(name = "productVersion")
     private double productVersion;
 
-    @Column(name = "prod_type")
-    private String product_type;
+   
 
     @Transient
      private static int updatedProductVersion;
@@ -44,10 +45,7 @@ public class Electronics extends  Product{
         productVersion = updatedProductVersion;
     }
 
-    @Transient
-    boolean isunderWarranty(){
-        return warrantyElible;// only true if it was less than 30 days ago. 
-    }
+    
 
 
 

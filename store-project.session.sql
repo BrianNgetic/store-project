@@ -1,1 +1,0 @@
-select * from store_inventory.electronics

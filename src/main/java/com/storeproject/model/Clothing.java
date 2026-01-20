@@ -16,15 +16,14 @@ import lombok.*;
 public class Clothing  extends  Product{
     
 
-    @Column(name = "prod_type")
-    private String type;
+  
 
 
 
-    @Column(name = "size")
+    @Column(name = "ProdSize")
     private String size;
     
-    @Column (name = "color")
+    @Column (name = "{ProdColor")
     private String color;
    
 

@@ -12,16 +12,16 @@ public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "user_id", nullable = false)
-  protected Long ID;
+  protected Long Id;
 
   @Column(name = "user_first_name", nullable = false)
-  public String First_name;
+  public String firstName;
 
   @Column(name = "user_last_name", nullable = false)
-  public String Last_name;
+  public String lastName;
 
   @Column (name = "user_email", nullable = false)
-  public  String Email;
+  public  String email;
 
   @Column(name = "user_password", nullable = false)
   public  String Password;

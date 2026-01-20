@@ -2,7 +2,6 @@ package com.storeproject.model;
 
 import java.time.*;
 
-import jakarta.persistence.Embedded;
 import jakarta.persistence.*;
 import lombok.*;
 // import com.storeproject.model.FoodNutrition;
@@ -14,13 +13,17 @@ import lombok.*;
 @Getter
 @NoArgsConstructor
 public class Food  extends Product{
+   
     
+    @Column (name = "prodName" , nullable = false)
+    protected  String name;
+
     @Embedded
     @NonNull
     private   FoodNutrition foodNutrition;
 
     //variables
-    @Column(name = "expiry_date")
+    @Column(name = "expiryDate")
     LocalDate expirationDate;
 
 
