@@ -15,9 +15,7 @@ import lombok.*;
 public class Food  extends Product{
    
     
-    @Column (name = "prodName" , nullable = false)
-    protected  String name;
-
+   
     @Embedded
     @NonNull
     private   FoodNutrition foodNutrition;

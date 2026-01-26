@@ -12,6 +12,6 @@ import com.storeproject.model.Clothing;
 
 
 @Repository
-public  interface ClothingRepository extends JpaRepository <Clothing, Long>{
+public interface ClothingRepository extends JpaRepository<Clothing, Long> {
     List<Clothing> findByCategory(String category);
 }

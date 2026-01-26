@@ -34,30 +34,34 @@ public class ProductService {
 
         
 
-        public Product addProduct(CreatedProduct req) throws Exception {
-            String prod_category = req.getCategory();
+        public void  addProduct(List<CreatedProduct> req) throws Exception {
+            for(CreatedProduct p: req){
+            String prod_category = p.getCategory();
             switch(prod_category){
-                case "Electronic":
+                case "electronics":
                     Electronics e = new Electronics();
-                    e.setName(req.getName());
+                    e.setName(p.getName());
                     e.setCategory(prod_category);
-                    e.setPrice(req.getPrice());
-                    e.setStock(req.getStock());
-                    e.setWarrantyElible(req.getWarrantyEligible());
-                    e.setWarrantyPeriod(req.getWarrantyPeriod());
-                    e.setProductVersion(req.getProductVersion());
-                    e.setWarrantyPeriod(req.getWarrantyPeriod());
-                    e.setProduct_type(req.getProductType());
-                    e.setProductVersion(req.getProductVersion());
-                    return  electronicsRepository.save(e);
-                case "Food":
+                    e.setPrice(p.getPrice());
+                    e.setStock(p.getStock());
+                    e.setType(p.getType());
+                    e.setWarrantyElible(p.getWarrantyEligible());
+                    e.setWarrantyPeriod(p.getWarrantyPeriod());
+                    e.setProductVersion(p.getProductVersion());
+                    e.setWarrantyPeriod(p.getWarrantyPeriod());
+                    // e.setProduct_type(p.getProductType());
+                    e.setProductVersion(p.getProductVersion());
+                     electronicsRepository.save(e);
+                     break;
+                case "food":
                     Food f = new Food();
-                    f.setName(req.getName());
+                    f.setName(p.getName());
                     f.setCategory(prod_category);
-                    f.setPrice(req.getPrice());
-                    f.setStock(req.getStock());
-                    f.setExpirationDate(req.getExpiryDate());
-                    NutritionDto dto  = req.getNutrition();
+                    f.setType(p.getType());
+                    f.setPrice(p.getPrice());
+                    f.setStock(p.getStock());
+                    f.setExpirationDate(p.getExpiryDate());
+                    NutritionDto dto  = p.getFoodNutrition();
                     if(dto == null) throw new  noNutritionInfoGiven();
                     else{
                     FoodNutrition nutrition = new FoodNutrition();
@@ -65,23 +69,28 @@ public class ProductService {
                     nutrition.setCarbs(dto.getCarbs());
                     nutrition.setFat(dto.getFat());
                     nutrition.setCalories(dto.getCalories());
+                    f.setFoodNutrition(nutrition);
                     }
-                    return foodRepository.save(f);
-                case "Clothing":
+                    
+                    foodRepository.save(f);
+                    break;
+                case "clothing":
                     Clothing c = new Clothing();
+                    c.setName(p.getName());
                     c.setCategory(prod_category);
-                    c.setPrice(req.getPrice());
-                    c.setStock(req.getPrice());
-                    c.setType(req.getClothType());
-                    c.setSize(req.getClothSize());
-                    c.setColor(req.getClothColor());
-                     return   clothingRepository.save(c);
+                    c.setPrice(p.getPrice());
+                    c.setStock(p.getPrice());
+                    c.setType(p.getType());
+                    c.setSize(p.getClothSize());
+                    c.setColor(p.getClothColor());
+                      clothingRepository.save(c);
+                      break;
                     
                 default:
                     throw new invalidProductCategory();
 
            }
-
+        }
 
         }
 
@@ -120,7 +129,7 @@ public class ProductService {
                     e.setWarrantyElible(req.getWarrantyEligible());
                     e.setWarrantyPeriod(req.getWarrantyPeriod());
                     e.setProductVersion(req.getProductVersion());
-                    e.setProduct_type(req.getProductType());
+                    // e.setProductType(req.getProductType());
                    return  electronicsRepository.save(e);
                     
                 case "Clothing":    
@@ -129,7 +138,7 @@ public class ProductService {
                     
                     c.setPrice(req.getPrice());
                     c.setStock(req.getStock());
-                    c.setType(req.getProductType());
+                    c.setType(req.getType());
                     c.setSize(req.getClothSize());
                     c.setColor(req.getClothColor());
                     return clothingRepository.save(c);
@@ -139,9 +148,12 @@ public class ProductService {
                     Food f = foodRepository.findById(Prod_id).orElseThrow(productNotFoundException::new);
                     f.setId(Prod_id);
                     f.setName(req.getName());
+                    f.setType(req.getType());
                     f.setPrice(req.getPrice());
                     f.setStock(req.getStock());
-                    NutritionDto dto = req.getNutrition();
+                    f.setExpirationDate(req.getExpiryDate());
+
+                    NutritionDto dto = req.getFoodNutrition();
                     if(dto == null) throw new noNutritionInfoException();
                     FoodNutrition nutrition = new FoodNutrition();
                      nutrition.setProtein(dto.getProtein());

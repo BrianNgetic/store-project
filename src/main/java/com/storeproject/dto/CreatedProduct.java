@@ -11,14 +11,16 @@ import lombok.*;
 public class CreatedProduct {
 
     // common
-    private String category;
+   
     private String name;
+    private String category;
+    private String type;
     private int price;
     private int stock;
 
     // food (optional)
     private LocalDate expiryDate;
-    private NutritionDto nutrition;
+    private NutritionDto foodNutrition;
 
     // nutrition can be another object and be null
 
@@ -26,11 +28,10 @@ public class CreatedProduct {
     private Boolean warrantyEligible;
     private Integer warrantyPeriod;
     private Double productVersion;
-    private String productType;
     private Integer updatedProductVersion;
 
     // clothing (optional)
-    private String clothType;
+    
     private String clothSize;
     private String clothColor;
   

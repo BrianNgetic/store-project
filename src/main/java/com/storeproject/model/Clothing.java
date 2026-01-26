@@ -23,7 +23,7 @@ public class Clothing  extends  Product{
     @Column(name = "ProdSize")
     private String size;
     
-    @Column (name = "{ProdColor")
+    @Column (name = "ProdColor")
     private String color;
    
 

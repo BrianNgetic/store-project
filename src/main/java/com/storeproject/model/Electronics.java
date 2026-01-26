@@ -1,7 +1,7 @@
 
 package com.storeproject.model;
 
-import java.io.*;
+// import java.io.*;
 // import java.lang.*;
 
 // import javax.annotation.processing.Generated;
@@ -19,9 +19,7 @@ import lombok.*;
 public class Electronics extends  Product{
 
 
-    @Column (name = "prodName" , nullable = false)
-    protected  String name;
-
+ 
     @Column(name =  "warrantyElegible")
     private boolean  warrantyElible;
 

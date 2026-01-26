@@ -10,6 +10,6 @@ import com.storeproject.model.Food;
 // import com.storeproject.model.Product;
 
 @Repository
-public interface FoodRepository extends JpaRepository<Food, Long> {
+public interface FoodRepository extends JpaRepository<Food, Long>{
             List<Food> findByCategory(String category);
 }

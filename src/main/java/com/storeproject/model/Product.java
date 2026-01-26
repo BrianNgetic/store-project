@@ -19,12 +19,17 @@ public abstract class Product {
     @Column(name = "prodId", nullable = false)
     protected  Long id;
     
+
+    @Column(name = "prodName", nullable  = false)
+    protected String name;
   
      @Column (name = "prodCategory", nullable = false)
     protected String category;
      
     @Column (name = "prodType" ,nullable = false)
     protected String type;
+
+    
   
 
     @Column (name = "prodPrice", nullable = false)

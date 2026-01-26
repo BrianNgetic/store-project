@@ -21,7 +21,7 @@ public class FoodNutrition {
         int fat;
 
         @Column(name = "calories", nullable = false)
-        int calories  = (protein * 4) + (carbs * 4) + (fat * 9);
+        int calories;
         
     
 

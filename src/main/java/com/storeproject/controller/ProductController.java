@@ -37,7 +37,7 @@ public class ProductController {
         
         }
     @PostMapping("/add-product") //create and add a product
-    public ResponseEntity<?> CreateProduct(@RequestBody CreatedProduct  product) throws Exception{
+    public ResponseEntity<?> CreateProduct(@RequestBody List<CreatedProduct>  product) throws Exception{
         //requestbody converts the http request body to java objects that we can use
 
 
