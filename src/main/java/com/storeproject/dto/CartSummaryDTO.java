@@ -1,6 +1,6 @@
-package com.storeproject.dto;
+// package com.storeproject.dto;
 
 
-public class CartSummaryDTO {
+// public class CartSummaryDTO {
     
-}
+// }

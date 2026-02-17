@@ -12,15 +12,15 @@ import com.storeproject.repository.*;;
 public class UserService {
 
 
-    protected UserRepository userRepository;
+    protected UsersRepository userRepository;
 
     public UserService(
-        UserRepository userRepository)
+        UsersRepository userRepository)
         {
             this.userRepository = userRepository;
          }
 
-        public User addUser(User newUser){
+        public Users addUser(Users newUser){
             return userRepository.save(newUser);
         }
 
@@ -29,18 +29,18 @@ public class UserService {
             userRepository.deleteById(id);
         }
 
-      public User viewUserById(Long id){
+      public Users viewUserById(Long id){
         
            return  userRepository.getReferenceById(id);
          }
     
-        public User viewUserByEmail(String email){
-                return userRepository.findByEmail(email);
-         }
+        // public User viewUserByEmail(String email)throws e{
+        //         return userRepository.findByEmail(email;
+        //  }
 
-        public List<User> viewAllUsers(){
+        public List<Users> viewAllUsers(){
             
-            List<User> users = userRepository.findAll();
+            List<Users> users = userRepository.findAll();
             return users;
             }
 

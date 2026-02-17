@@ -4,7 +4,7 @@ import java.util.*;
 // import com.storeproject.service.product.DeleteProductServiceInterfaceImplementation;
 import com.storeproject.service.user.*;
 // import com.storeproject.repository.*;
-import com.storeproject.model.User;
+import com.storeproject.model.Users;
 
 // import org.springframework.web.bind.annotation.RequestParam;
 import  org.springframework.web.bind.annotation.*;
@@ -33,9 +33,9 @@ public class UserController {
     }
 
     @PostMapping("/save-user")
-    public ResponseEntity<?> CreateUser(@RequestBody User user) {
+    public ResponseEntity<?> CreateUser(@RequestBody Users user) {
         
-        User createdUser = userService.addUser(user);
+        Users createdUser = userService.addUser(user);
         
         return  new ResponseEntity<>(createdUser, HttpStatus.CREATED);
 
@@ -55,14 +55,14 @@ public class UserController {
         return new  ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/user/email")
-    public ResponseEntity<?> getUserByEmail(String email){
-          User foundUser = userService.viewUserByEmail(email);
-        return ResponseEntity.ok(foundUser);
-    }
+    // @GetMapping("/user/email")
+    // public ResponseEntity<?> getUserByEmail(String email){
+    //       User foundUser = userService.viewUserByEmail(email);
+    //     return ResponseEntity.ok(foundUser);
+    // }
 
     @GetMapping("/user/all-users")
-    public ResponseEntity<List<User>> getAllUsers(){    
+    public ResponseEntity<List<Users>> getAllUsers(){    
 
         return ResponseEntity.ok(userService.viewAllUsers());
     }

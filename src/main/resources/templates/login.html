@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html xmlns="http:/ /www.w3.org/1999/xhtml"
+xmlns:th="http:/ /www.thymeleaf.org">
+<head>
+<title>Demo Form</title>
+</head>
+<body>
+<h1>Login</h1>
+
+        <form action="/login" method="post">
+            <label>Username</label>
+            <input type="text" name="username" required>
+
+            <label>Password</label>
+            <input type="password" name="password" required>
+
+            <button type="submit">Login</button>
+            
+        </form>
+
+        <p class="link">
+            Don’t have an account? <a href="/register">Register</a>
+        </p>
+    </div>
+</body>
+</html>

@@ -15,10 +15,10 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Admin implements UserDetails{
+public class Users implements UserDetails{
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "user_id", nullable = false)
+
   protected Long Id;
 
   @Column(name = "username", nullable = false)
@@ -47,7 +47,7 @@ public class Admin implements UserDetails{
   public String zip;
 
 
-  public Admin (
+  public Users (
       String username,
       String password,
       String fullname,
@@ -69,7 +69,7 @@ public class Admin implements UserDetails{
       }
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-            return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
+            return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
   }
 
   @Override
