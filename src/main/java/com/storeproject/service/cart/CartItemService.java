@@ -119,8 +119,7 @@ public void deleteFromCart(Long id) throws Exception{
         Optional<CartItem> cartItemToBeDeleted = cartItemRepository.findByCartAndProduct(cart, tobeDeletedProduct );
 
 
-            //delete 
-        cart.deleteFromUserCart(cartItemToBeDeleted);
+         
 }
 
 

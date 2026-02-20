@@ -20,7 +20,7 @@ public class Cart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name  = "cartId", nullable = false)
+   
     protected Long id;
 
 
@@ -37,13 +37,14 @@ public class Cart {
         }
     }
 
-    public void deleteFromUserCart(Optional<CartItem> cartItem){
+    public void deleteFromUserCart(CartItem cartItem){
         if(userCartItems.contains(cartItem)){
             userCartItems.remove(cartItem);
         }
     }
 
     public List<CartItem> viewCart(){
+        
         return userCartItems;
     }
 
