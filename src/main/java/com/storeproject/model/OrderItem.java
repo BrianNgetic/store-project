@@ -15,6 +15,9 @@ public class OrderItem {
     @Column(name = "OrderItemId")
     protected Long id;
 
+     @ManyToOne
+    @JoinColumn(name = "order_id")
+    protected Order order;
 
     @ManyToOne
     @JoinColumn(name = "prodId")
@@ -23,6 +26,8 @@ public class OrderItem {
     @Column(name = "prodName")
     protected String prodName;
 
-    protected Long priceAtPurchase;
+   
+
+    protected double  priceAtPurchase;
     
 }
