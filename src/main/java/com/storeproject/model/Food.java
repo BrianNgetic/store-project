@@ -12,6 +12,7 @@ import lombok.*;
 @Setter
 @Getter
 @NoArgsConstructor
+@PrimaryKeyJoinColumn(name = "prodId")
 public class Food  extends Product{
    
     

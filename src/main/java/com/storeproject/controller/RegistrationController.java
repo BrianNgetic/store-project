@@ -30,7 +30,10 @@ public class RegistrationController{
     //    User user = registrationDTO.CreateUser(passwordEncoder);
        System.out.println("this hit");
        System.out.println(registrationDTO);
-       userRepository.save(registrationDTO.CreateUser(passwordEncoder));
+       Users CreatedUser = registrationDTO.CreateUser(passwordEncoder);
+    
+       userRepository.save(CreatedUser);
+       CreatedUser.printUser();
         return "redirect:/login";
     }
   

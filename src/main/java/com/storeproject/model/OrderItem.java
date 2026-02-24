@@ -23,11 +23,6 @@ public class OrderItem {
     @JoinColumn(name = "prodId")
     protected Product product;
     
-    @Column(name = "prodName")
-    protected String prodName;
-
-   
-
     protected double  priceAtPurchase;
     
 }

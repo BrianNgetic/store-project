@@ -27,6 +27,7 @@ public class Payment {
 
 
     @Column(name = "PaymentStatus")
+    @Enumerated(EnumType.STRING)
     protected Status status;
 
     @Column(name = "UUID")

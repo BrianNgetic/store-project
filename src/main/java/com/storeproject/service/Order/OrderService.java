@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 
 import  org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
+
 import java.util.*;
 import com.storeproject.*;
 import com.storeproject.model.*;
@@ -13,6 +15,12 @@ import com.storeproject.model.Order.Status;
 import com.storeproject.Exceptions.*;
 import com.storeproject.repository.*;
 import com.storeproject.service.Payment.*;
+
+import jakarta.transaction.Transactional;
+
+
+@Service
+
 public class OrderService{
     //get the current user
 
@@ -37,6 +45,7 @@ public class OrderService{
         this.cartItemRepository  = cartItemRepository;
     }
 
+    @Transactional
     public void  checkout() throws Exception{
        Authentication auth = SecurityContextHolder.getContext().getAuthentication() ;
         String username= auth.getName();
@@ -54,18 +63,25 @@ public class OrderService{
         order.setTotal(cart.getTotal());
         order.setAddress(user.getAddress());
        
+        //save the order to the db
+        orderRepository.save(order);
         //get the cart items
         List<CartItem> thisUsersCartItems =  cart.getUserCartItems();
 
         //for each, convert to orderitem
       
         for(CartItem item: thisUsersCartItems){
-            //convert each cartItem to an orderItem;
-            orderItemService.createOrderItem(order, item.getId());
+            //convert each cartItem to an orderItem and save it
+           orderItemService.createOrderItem(order, item);
+        
+
         }
+
+     orderRepository.save(order);
 
         //before going through with payment processing
         order.setStatus(Status.pending);
+
 
         //only for simulation before adding actual payment methods
         String paymentMethod = "1111 2222 3333 4444";
@@ -87,14 +103,10 @@ public class OrderService{
 
         if(thisPayment.getStatus() == Payment.Status.SUCCESS){
             order.setStatus(Status.paid);
-            //clear the cartItems from the users cart
-               for(CartItem item: thisUsersCartItems){
-            //delete each cartItem from the cart and repository
-                    cart.deleteFromUserCart(item);
-                    cartItemRepository.delete(item);
-                    //save the order
-                    orderRepository.save(order);
-          }
+
+        
+        cartItemRepository.deleteAll(thisUsersCartItems);
+        cart.getUserCartItems().clear();
 
         }
         else{
@@ -104,6 +116,8 @@ public class OrderService{
 
         //after payment  clear the cart and the cartItems
         
+
+
 
 
 

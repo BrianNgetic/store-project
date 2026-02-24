@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 import org.springframework.stereotype.*;
 import com.storeproject.model.*;
+import com.storeproject.Exceptions.*;
 import  static com.storeproject.model.Payment.Status;
 import com.storeproject.repository.OrderRepository;
 
@@ -25,7 +26,8 @@ public class PaymentService {
       
        
         
-        Order thisOrder = orderRepository.findByOrder(order);       
+        Order thisOrder = orderRepository.getReferenceById(order.getId());
+                               
         double total = thisOrder.getTotal();
         //simulating payment
         if(total > 1000){

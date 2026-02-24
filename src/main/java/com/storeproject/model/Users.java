@@ -17,8 +17,8 @@ import lombok.*;
 @NoArgsConstructor
 public class Users implements UserDetails{
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "user_id", nullable = false)
   protected Long Id;
 
   @Column(name = "username", nullable = false)
@@ -67,6 +67,12 @@ public class Users implements UserDetails{
 
       
       }
+  public String printUser(){
+    String thisUsers = "saved username" + username;
+
+    return thisUsers;
+
+  }
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
             return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));

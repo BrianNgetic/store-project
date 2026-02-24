@@ -9,6 +9,7 @@ import java.util.*;
 @Entity
 @Getter
 @Setter
+@Table(name = "Customer_orders")
 public class Order {
 
     public enum Status{
@@ -36,7 +37,7 @@ public class Order {
     @Column(name = "address")
     protected String address;
 
-    @Column(name = "payment")
+    @OneToOne(mappedBy = "order")
     protected Payment payment;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)

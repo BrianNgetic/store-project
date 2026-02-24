@@ -9,44 +9,49 @@ import com.storeproject.repository.*;
 @Service
 public class OrderItemService {
 
-    private final OrderRepository orderRepository;
+
+
+  
     //get the current user
     //get their cart
     //loop through their cartItems and make everyOne of them an order Item
-    
+     
     private  CartRepository cartRepository;
     private  CartItemRepository cartItemRepository ;
     private ProductRepository productRepository;
+    private OrderItemRepository orderItemRepository;
+    private final OrderRepository orderRepository;
 
     public OrderItemService(
                 CartRepository cartRepository,
                 CartItemRepository cartItemRepository,
-                ProductRepository productRepository
-
-    , OrderRepository orderRepository){
+                ProductRepository productRepository,
+                OrderItemRepository orderItemRepository,
+                OrderRepository orderRepository){
         this.cartRepository = cartRepository;
         this.cartItemRepository = cartItemRepository;
         this.productRepository = productRepository;
         this.orderRepository = orderRepository;
+        this.orderItemRepository = orderItemRepository;
     }
  
 
-public void  createOrderItem(Order order, Long id){
+public void  createOrderItem(Order order, CartItem cartItem ){
     //create a new orderItem
     OrderItem orderItem = new OrderItem();
-    //get the cartItem
-    CartItem thisCartItem = cartItemRepository.findbyId(id);
-    Product thisProduct = cartItemRepository.findByProduct(thisCartItem.getProduct());
+    //get the cartItem;
+    CartItem thisCartItem = cartItem;
+    Product thisProduct = thisCartItem.getProduct();
 
 
     //populate the fields
     orderItem.setOrder(order);
     orderItem.setProduct(thisProduct);
-    orderItem.setProdName(thisProduct.getName());
-    orderItem.setPriceAtPurchase(thisProduct.getPrice());
+    orderItem.setPriceAtPurchase(thisProduct.getPrice()); //to be improvedd
 
-    
-   
+    orderItemRepository.save(orderItem);
+
+
 
 
 }

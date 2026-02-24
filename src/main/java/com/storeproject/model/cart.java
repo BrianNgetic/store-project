@@ -29,7 +29,7 @@ public class Cart {
     protected Users user;
     
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
-    private List<CartItem> userCartItems;
+    private List<CartItem> userCartItems = new ArrayList<>();
 
     public void addToUserCart(CartItem cartItem){
         if(cartItem != null){
