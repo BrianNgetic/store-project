@@ -16,6 +16,7 @@ import lombok.*;
 @Setter 
 @NoArgsConstructor
 @Table(name = "electronics")
+@PrimaryKeyJoinColumn(name = "prodId")
 public class Electronics extends  Product{
 
 

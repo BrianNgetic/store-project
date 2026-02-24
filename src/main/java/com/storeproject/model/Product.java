@@ -8,11 +8,11 @@ import lombok.*;
 import jakarta.validation.constraints.*;
 
 
-// @MappedSuperclass
+//@MappedSuperclass
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter
-@Inheritance(strategy = InheritanceType.JOINED)
 @NoArgsConstructor
 public abstract class Product {
 

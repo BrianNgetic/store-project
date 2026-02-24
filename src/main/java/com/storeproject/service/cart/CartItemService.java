@@ -14,6 +14,7 @@ import com.storeproject.service.product.*;
 import jakarta.transaction.Transactional;
 import java.util.*;
 import com.storeproject.repository.*;
+import com.storeproject.dto.*;
 
 @Service
 public class CartItemService {
@@ -45,19 +46,18 @@ public class CartItemService {
 //i can also jus add the productid to the cart dirrectlu
 
 
-@Transactional
-    public void addToCart(Long Id, int quantity) throws Exception{
+@Transactional 
+    public void addToCart(AddToCartDto req) throws Exception{
 
         //get the current user
         Authentication auth = SecurityContextHolder.getContext().getAuthentication() ;
         String username= auth.getName();
         Users user = usersRepository.findByUsername(username).
                                     orElseThrow(() -> new UsernameNotFoundException("Username not found"));
+    
+     Cart cart = cartRepository.findByUser(user);
+     
 
-        //get the users cart and create one  if the user doesnt have it
-    //    Optional<Cart> cart = cartRepository.findByUser(user);
-
-    Cart cart = cartRepository.findByUser(user);
                         
                                
     if(cart == null){
@@ -67,21 +67,22 @@ public class CartItemService {
     
         //create the cart item 
         CartItem cartItem  = new CartItem();
-        Product product = productRepository.findById(Id). //find the product
+        Product product = productRepository.findById(req.getId()). //find the product
                         orElseThrow(() -> new productNotFoundException("Product not found"));
         cartItem.setProduct(product);
         cartItem.setCart(cart);
-        cartItem.setQuantity(quantity);
+        cartItem.setQuantity(req.getQuantity());
 
         //add it to the cart
         cart.addToUserCart(cartItem);
 
+//link the cart to the user
+    cart.setUser(user);
 
-      //update the stock
-         product.setStock(product.getStock() - quantity);
-         if(product.getStock() < 0){
-            throw new outOfStockException();
-         }
+       //save the cart and cartItem to db
+    cartItemRepository.save(cartItem);
+      cartRepository.save(cart);
+
 
 
 }
@@ -116,14 +117,15 @@ public void deleteFromCart(Long id) throws Exception{
         // }
 
         //get the current cartItem
-        Optional<CartItem> cartItemToBeDeleted = cartItemRepository.findByCartAndProduct(cart, tobeDeletedProduct );
-
-
-         
+        CartItem cartItemToBeDeleted = cartItemRepository.findByCartAndProduct(cart, tobeDeletedProduct );
+        cart.deleteFromUserCart(cartItemToBeDeleted);
+        cartItemRepository.delete(cartItemToBeDeleted);
+      
+        
 }
 
 
-public List<CartItem> viewCart() throws Exception{
+public List<GetCartSummaryDto> viewCart() throws Exception{
     //we have to get the current user first
 
       Authentication auth = SecurityContextHolder.getContext().getAuthentication() ;
@@ -135,11 +137,20 @@ public List<CartItem> viewCart() throws Exception{
 
     Cart cart = cartRepository.findByUser(user);
 
-    // List<CartItem> usersCart = (cartItemRepository.findByCart(cart));
+    List<CartItem> usersCart =  cart.getUserCartItems();
+    List<GetCartSummaryDto> summaries = new ArrayList<>();
+
+    for(CartItem item:  usersCart){
+        GetCartSummaryDto getCartSummaryDto = new GetCartSummaryDto();
+        getCartSummaryDto.setProduct(item.getProduct());
+        getCartSummaryDto.setQuantity(item.getQuantity());
+        summaries.add(getCartSummaryDto);
+
+    }
 
 
     
-    return cart.viewCart();
+    return summaries;
 }
 
 

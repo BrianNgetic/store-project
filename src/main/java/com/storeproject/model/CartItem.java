@@ -39,6 +39,12 @@ public class CartItem {
     @Column(name = "quantity")
     protected int quantity;
 
+    public CartItem(Long id, int quantity)
+    {
+        this.id = id;
+        this.quantity = quantity;
+    }
+
 
     
     
