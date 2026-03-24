@@ -12,6 +12,6 @@ import com.storeproject.model.Electronics;
 
 @Repository
 public interface ElectronicsRepository extends JpaRepository<Electronics, Long> {
-        List<Electronics> findByCategory(String category);
+       
 }
     

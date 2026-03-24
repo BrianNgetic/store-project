@@ -4,9 +4,7 @@ import  org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.storeproject.Exceptions.UsernameNotFoundException;
-import com.storeproject.Exceptions.outOfStockException;
-import com.storeproject.Exceptions.productNotFoundException;
+import com.storeproject.Exceptions.*;
 import com.storeproject.model.*;
 // import com.storeproject.service.*;
 import com.storeproject.service.product.*;
@@ -52,12 +50,14 @@ public class CartItemService {
         //get the current user
         Authentication auth = SecurityContextHolder.getContext().getAuthentication() ;
         String username= auth.getName();
+
+
         Users user = usersRepository.findByUsername(username).
-                                    orElseThrow(() -> new UsernameNotFoundException("Username not found"));
-    
+                                    orElseThrow(() -> new UserNotFoundException("Username not found"));
+
      Cart cart = cartRepository.findByUser(user);
      
-
+    
                         
                                
     if(cart == null){
@@ -68,7 +68,7 @@ public class CartItemService {
         //create the cart item 
         CartItem cartItem  = new CartItem();
         Product product = productRepository.findById(req.getId()). //find the product
-                        orElseThrow(() -> new productNotFoundException("Product not found"));
+                        orElseThrow(() -> new ProductNotFoundException("Product not found"));
         cartItem.setProduct(product);
         cartItem.setCart(cart);
         cartItem.setQuantity(req.getQuantity());
@@ -79,9 +79,11 @@ public class CartItemService {
 //link the cart to the user
     cart.setUser(user);
 
-       //save the cart and cartItem to db
-    cartItemRepository.save(cartItem);
-      cartRepository.save(cart);
+    //save the cart and cartItem to db
+    //apperantly I dont even need to do this as it inside a 
+    //mannaged transactional method
+    // cartItemRepository.save(cartItem);
+    //   cartRepository.save(cart);
 
 
 
@@ -99,7 +101,7 @@ public void deleteFromCart(Long id) throws Exception{
         Authentication auth = SecurityContextHolder.getContext().getAuthentication() ;
         String username= auth.getName();
         Users user = usersRepository.findByUsername(username).
-                                    orElseThrow(() -> new UsernameNotFoundException("Username not found"));
+                                    orElseThrow(() -> new UserNotFoundException("Username not found"));
 
         //get the current users cart
         Cart cart  = cartRepository.findByUser(user);
@@ -111,7 +113,7 @@ public void deleteFromCart(Long id) throws Exception{
         // }
 
         Product tobeDeletedProduct  = productRepository.findById(id).
-                                        orElseThrow(() -> new productNotFoundException());
+                                        orElseThrow(() -> new ProductNotFoundException());
         // if(tobeDeletedProduct != null){
         //           cart.deleteFromUserCart(cartItemRepository.findById(id));     
         // }
@@ -131,7 +133,7 @@ public List<GetCartSummaryDto> viewCart() throws Exception{
       Authentication auth = SecurityContextHolder.getContext().getAuthentication() ;
         String username= auth.getName();
         Users user = usersRepository.findByUsername(username).
-                                    orElseThrow(() -> new UsernameNotFoundException("Username not found"));
+                                    orElseThrow(() -> new UserNotFoundException("Username not found"));
 
     //get the current cart
 
@@ -163,7 +165,7 @@ public double getTotal() throws Exception{
       Authentication auth = SecurityContextHolder.getContext().getAuthentication() ;
         String username= auth.getName();
         Users user = usersRepository.findByUsername(username).
-                                    orElseThrow(() -> new UsernameNotFoundException("Username not found"));
+                                    orElseThrow(() -> new UserNotFoundException("Username not found"));
 
     //get the current cart
 

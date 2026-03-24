@@ -20,7 +20,7 @@ import jakarta.transaction.Transactional;
 
 
 @Service
-
+@Transactional
 public class OrderService{
     //get the current user
 
@@ -49,9 +49,9 @@ public class OrderService{
     public void  checkout() throws Exception{
        Authentication auth = SecurityContextHolder.getContext().getAuthentication() ;
         String username= auth.getName();
-        Users user = usersRepository.findByUsername(username).
-            orElseThrow(() -> new UsernameNotFoundException("Username not found"));
-
+        
+        
+        Users user = usersRepository.findByUsername(username).orElseThrow( () -> new UserNotFoundException());
         //get the current users cart
         Cart cart  = cartRepository.findByUser(user);
 
@@ -73,6 +73,7 @@ public class OrderService{
         for(CartItem item: thisUsersCartItems){
             //convert each cartItem to an orderItem and save it
            orderItemService.createOrderItem(order, item);
+        //    if()
         
 
         }

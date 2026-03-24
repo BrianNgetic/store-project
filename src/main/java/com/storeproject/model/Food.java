@@ -2,6 +2,8 @@ package com.storeproject.model;
 
 import java.time.*;
 
+import org.springframework.cglib.core.Local;
+
 import jakarta.persistence.*;
 import lombok.*;
 // import com.storeproject.model.FoodNutrition;
@@ -26,49 +28,33 @@ public class Food  extends Product{
     LocalDate expirationDate;
 
 
+    public Food(
+        String name,
+        String category, 
+        String type, 
+        double price, 
+        int stock, 
+        FoodNutrition foodNutrition,
+        LocalDate exprirationDate
+       ){
+
+            this.name = name;
+            this.category =  category;
+            this.type = type;
+            this.price = price;
+            this.stock  = stock;
+            this.foodNutrition = foodNutrition;
+            this.expirationDate = exprirationDate;
+    }
     @Override
     public void validate() {
     //     throw new UnsupportedOperationException("Not supported yet.");
     // 
     }
 
-    
-                //functions
-    //mutators
-   // nutrutition accessor and modifier fuction to be added soon
-
-    
 
 
-    //accessors
-    // boolean  isExpired(){
-
-    //     return true; ///to be added to service
-    // }
-    
-    // // String getexpirationDate(){
-   
-
-    // // }
-
-    // @Override
-    // // void applydiscount() {
-    // //     // TODO
-      
-    // // }
-
-    // // @Override
-    // // void updatestock() {
-    // //     // TODO
-
-    // // }
-
-    // // @Override
-    // // double calcTotal() {
-    // //     // TODO
-    // //     return total;
-    // // }
-
+ 
  
     
 }

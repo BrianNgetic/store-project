@@ -1,4 +1,6 @@
 package com.storeproject.service.user;
+import com.storeproject.Exceptions.UserNotFoundException;
+import com.storeproject.Exceptions.emailAlreadyExistsException;
 // import com.storeproject.dto.*;
 import com.storeproject.model.*;
 
@@ -20,16 +22,30 @@ public class UserService {
             this.userRepository = userRepository;
          }
 
-        public Users addUser(Users newUser){
+        public Users addUser(Users newUser) throws Exception{
+            if(userRepository.existsByEmail(newUser.getEmail())){
+                throw new emailAlreadyExistsException();
+            }
             return userRepository.save(newUser);
+
+            
         }
 
-        public void deleteUser( Long id){
+
+        public void deleteUser( Long id) throws Exception{
+
+        if(!userRepository.existsById(id)){
+            throw new UserNotFoundException();
+        }
 
             userRepository.deleteById(id);
         }
 
-      public Users viewUserById(Long id){
+      public Users viewUserById(Long id) throws Exception{
+
+        if(!userRepository.existsById(id)){
+            throw new UserNotFoundException();
+        }
         
            return  userRepository.getReferenceById(id);
          }
@@ -38,9 +54,21 @@ public class UserService {
         //         return userRepository.findByEmail(email;
         //  }
 
-        public List<Users> viewAllUsers(){
+    public Users viewUserByEmail(String email) throws Exception{
+        if(!userRepository.existsByEmail(email)){
+            throw new UserNotFoundException();
+        }
+
+        return userRepository.findByEmail(email);
+    }
+
+
+        public List<Users> viewAllUsers() throws Exception{
             
             List<Users> users = userRepository.findAll();
+            if(users.isEmpty()){
+                throw new UserNotFoundException("No users found");
+            }
             return users;
             }
 

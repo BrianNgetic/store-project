@@ -7,7 +7,9 @@ import lombok.*;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class CreatedProduct {
 
     // common
@@ -15,7 +17,7 @@ public class CreatedProduct {
     private String name;
     private String category;
     private String type;
-    private int price;
+    private double price;
     private int stock;
 
     // food (optional)

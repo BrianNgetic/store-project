@@ -15,6 +15,8 @@ import lombok.*;
 @Getter
 @Setter 
 @NoArgsConstructor
+@AllArgsConstructor
+
 @Table(name = "electronics")
 @PrimaryKeyJoinColumn(name = "prodId")
 public class Electronics extends  Product{
@@ -30,6 +32,26 @@ public class Electronics extends  Product{
     @Column(name = "productVersion")
     private double productVersion;
 
+
+    public Electronics(
+        String name,
+        String category, 
+        String type, 
+        double price, 
+        int stock, 
+        boolean warrantyElegible,
+        int warrantyPeriod,
+        double productVersion){
+
+            this.name = name;
+            this.category =  category;
+            this.type = type;
+            this.price = price;
+            this.stock  = stock;
+            this.warrantyElible = warrantyElegible;
+            this.warrantyPeriod = warrantyPeriod;
+            this.productVersion = productVersion;
+    }
    
 
     @Transient

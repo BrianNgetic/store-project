@@ -29,6 +29,7 @@ public class SecurityConfig {
                 "/images/**").permitAll()
             .requestMatchers(HttpMethod.PUT, "/update-product/*").hasAuthority("ADMIN")
             .requestMatchers(HttpMethod.DELETE, "/delete-product/*").hasAuthority("ADMIN")
+            .requestMatchers(HttpMethod.POST , "product/add-product/*").hasAnyAuthority("ADMIN")
            .requestMatchers(HttpMethod.GET, "/register").permitAll()
             .requestMatchers(HttpMethod.POST, "/register").permitAll()
             

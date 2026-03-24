@@ -42,7 +42,9 @@ public abstract class Product {
     @Min(value = 0, message =  "Stock can not be a negative")
     protected int stock;
 
-   
+    //to maintain isolation(optimistic lock)
+    @Version
+    private int Version;
 
     public   boolean isInStock(){
         if(stock >= 1){

@@ -3,8 +3,6 @@ package com.storeproject.model;
 
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.*;
 import jakarta.validation.constraints.*;
 import com.storeproject.dto.*;
@@ -36,6 +34,15 @@ public class Cart {
             this.userCartItems.add(cartItem);
         }
     }
+
+    public boolean cartContains(CartItem cartItem){
+        if(userCartItems.contains(cartItem)){
+            return true;
+        }
+        return false;
+    }
+
+    
 
     public void deleteFromUserCart(CartItem cartItem){
         if(userCartItems.contains(cartItem)){

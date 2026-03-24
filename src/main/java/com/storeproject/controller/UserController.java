@@ -33,7 +33,7 @@ public class UserController {
     }
 
     @PostMapping("/save-user")
-    public ResponseEntity<?> CreateUser(@RequestBody Users user) {
+    public ResponseEntity<?> CreateUser(@RequestBody Users user) throws Exception{
         
         Users createdUser = userService.addUser(user);
         
@@ -43,14 +43,14 @@ public class UserController {
 
 
     @DeleteMapping("/delete-user/{id}")
-    public ResponseEntity<?> DeleteUser(@PathVariable Long id){
+    public ResponseEntity<?> DeleteUser(@PathVariable Long id) throws Exception{
         userService.deleteUser(id);
 
         return ResponseEntity.ok("User sucessfully deleted");
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<?> getUserById(@PathVariable Long id){
+    public ResponseEntity<?> getUserById(@PathVariable Long id) throws Exception{
         userService.viewUserById(id);
         return new  ResponseEntity<>(HttpStatus.OK);
     }
@@ -62,7 +62,7 @@ public class UserController {
     // }
 
     @GetMapping("/user/all-users")
-    public ResponseEntity<List<Users>> getAllUsers(){    
+    public ResponseEntity<List<Users>> getAllUsers() throws Exception{    
 
         return ResponseEntity.ok(userService.viewAllUsers());
     }

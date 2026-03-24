@@ -22,6 +22,8 @@ public class OrderItem {
     @ManyToOne
     @JoinColumn(name = "prodId")
     protected Product product;
+
+    protected Integer quantity;
     
     protected double  priceAtPurchase;
     

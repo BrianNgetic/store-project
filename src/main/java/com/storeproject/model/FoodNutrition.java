@@ -7,6 +7,7 @@ import lombok.*;
 @Embeddable
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 public class FoodNutrition {
    
@@ -23,6 +24,16 @@ public class FoodNutrition {
         @Column(name = "calories", nullable = false)
         int calories;
         
-    
+   public FoodNutrition(
+        int protein,
+        int carbs, 
+        int fat,
+        int calories
+   ){
+        this.protein = protein;
+        this.carbs = carbs;
+        this.fat = fat;
+        this.calories = calories;
+   } 
 
 }

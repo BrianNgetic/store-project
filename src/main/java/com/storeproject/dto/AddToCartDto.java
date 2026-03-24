@@ -19,4 +19,7 @@ public Long getId(){
 public  int getQuantity(){
     return this.Quantity;
 }
+public void setQuantity(int  quantity){
+    this.Quantity = quantity;
+}
 }

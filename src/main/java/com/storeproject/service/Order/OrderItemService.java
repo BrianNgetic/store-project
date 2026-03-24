@@ -3,6 +3,8 @@ package com.storeproject.service.Order;
 import  org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import com.storeproject.Exceptions.outOfStockException;
 import com.storeproject.model.*;
 import com.storeproject.repository.*;
 
@@ -36,7 +38,7 @@ public class OrderItemService {
     }
  
 
-public void  createOrderItem(Order order, CartItem cartItem ){
+public void  createOrderItem(Order order, CartItem cartItem ) throws Exception{
     //create a new orderItem
     OrderItem orderItem = new OrderItem();
     //get the cartItem;
@@ -47,9 +49,14 @@ public void  createOrderItem(Order order, CartItem cartItem ){
     //populate the fields
     orderItem.setOrder(order);
     orderItem.setProduct(thisProduct);
+    orderItem.setQuantity(thisCartItem.getQuantity());
     orderItem.setPriceAtPurchase(thisProduct.getPrice()); //to be improvedd
 
     orderItemRepository.save(orderItem);
+
+    if(orderItem.getQuantity() > orderItem.getProduct().getStock()){
+            throw new outOfStockException();
+    }
 
 
 

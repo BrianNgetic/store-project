@@ -11,5 +11,5 @@ import com.storeproject.model.Food;
 
 @Repository
 public interface FoodRepository extends JpaRepository<Food, Long>{
-            List<Food> findByCategory(String category);
+           
 }

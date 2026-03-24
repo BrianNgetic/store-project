@@ -61,7 +61,7 @@ public class ProductController {
     
     }
     @GetMapping("/id/{id}") // get requests
-    public ResponseEntity<Product> viewById(@PathVariable Long id) throws Exception{
+    public ResponseEntity<CreatedProduct> viewById(@PathVariable Long id) throws Exception{
 
       
       return ResponseEntity.ok(productService.viewProductById(id));
@@ -69,12 +69,12 @@ public class ProductController {
 
 
     @GetMapping("/category/{category}") //view by category
-    public ResponseEntity<List<Product>> viewByCategory(@PathVariable String category) throws Exception{
+    public ResponseEntity<List<CreatedProduct>> viewByCategory(@PathVariable String category) throws Exception{
              return ResponseEntity.ok(productService.viewByCategory(category));
     }
 
     @GetMapping("/allProducts")
-    public ResponseEntity<List<Product>> viewAllProducts(){
+    public ResponseEntity<List<CreatedProduct>> viewAllProducts() throws Exception{
            return ResponseEntity.ok(productService.viewAllProducts());
     }
 

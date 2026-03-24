@@ -4,6 +4,8 @@ import lombok.*;
 
 
 @Setter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 public class NutritionDto{

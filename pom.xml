@@ -26,13 +26,25 @@
 <url/>
 </scm>
 <properties>
-<java.version>21</java.version>
+    <java.version>21</java.version>
+
+    <java.version>17</java.version>
+    <junit.jupiter.version>5.8.2</junit.jupiter.version>
+    <org.mapstruct.version>1.6.3</org.mapstruct.version>
+    <org.projectlombok.version>1.18.34</org.projectlombok.version>
+    <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
 </properties>
 <dependencies>
+
     <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-data-jpa</artifactId>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-jpa</artifactId>
     </dependency>
+<!-- 
+      <dependency>
+        <groupId>org.mapstruct</groupId>
+        <artifactId>mapstruct</artifactId>
+    </dependency> -->
 
     <dependency>
         <groupId>com.mysql</groupId>
@@ -40,16 +52,16 @@
     </dependency>
 
     <dependency>
-    <groupId>org.projectlombok</groupId>
-    <artifactId>lombok</artifactId>
-    <scope>provided</scope>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <scope>provided</scope>
     </dependency>
-<dependency>
-    <groupId>jakarta.platform</groupId>
-    <artifactId>jakarta.jakartaee-api</artifactId>
-    <version>10.0.0</version>
-    <scope>provided</scope>
-</dependency>
+    <dependency>
+        <groupId>jakarta.platform</groupId>
+        <artifactId>jakarta.jakartaee-api</artifactId>
+        <version>10.0.0</version>
+        <scope>provided</scope>
+    </dependency>
 
     <dependency>
         <groupId>org.springframework.boot</groupId>
@@ -57,18 +69,36 @@
     </dependency>
 
     <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-validation</artifactId>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-validation</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId> 
+        <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
+
+    <dependency>
+        <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
+        <version>2.4.240</version>
+        <scope>test</scope>
+    </dependency>
+<!-- <dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter-api</artifactId>
+    <version>5.10.2</version>
+    <scope>test</scope>
 </dependency>
-<dependency>
-    <groupId>org.springframework.boot</groupId> 
-    <artifactId>spring-boot-starter-security</artifactId>
-</dependency>
-	<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-thymeleaf</artifactId>
-</dependency>
- 
+  -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <scope>test</scope>
+    </dependency>
 
 </dependencies>
 <build>
