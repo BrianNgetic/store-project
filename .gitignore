@@ -11,3 +11,34 @@
 # OS
 *.DS_Store
 Thumbs.db
+# Maven build directory
+target/
+
+# Compiled class files
+*.class
+
+# Logs
+*.log
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+
+# Spring Boot
+*.jar
+*.war
+
+# Test output
+surefire-reports/
+
+# Misc
+*.tmp
+*.swp

@@ -36,33 +36,5 @@ public class CartService {
 
          
     }
-    // public List<CartItem>  viewCart(Users user){
-    //       Cart cart = cartRepository.findUser(user); //find the users cart
-    //         List<CartItem> cartresult = new ArrayList<>();
-    //         cartresult.addAll(cartRepository.findAll());
-    //     return cartresult;
-    // }
-
-
-    // public Long getTotal(){
-
-    //          List<CartItem> cartresult = new ArrayList<>();
-    //         cartresult.addAll(cartRepository.findAll());
-
-    //         Long total ;
-    //         for(int i = 0; i < cartresult.size(); i++){
-    //             int count = cartresult.get(i).getTotal();
-    //         }
-    // }
-
-    //delefated the bottom to 
-    // public void addToCart(Long id) throws productNotFoundException{
-    //           Optional<Product> product = productRepository.findById(id);
-    //           if(product.isPresent()){
-                    
-    //           }
-    //          else{
-    //             throw new productNotFoundException();
-    //           }
-    // }
+ 
 }

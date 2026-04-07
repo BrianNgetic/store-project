@@ -58,8 +58,8 @@ public class CartItemService {
      Cart cart = cartRepository.findByUser(user);
      
     
-                        
-                               
+ 
+ 
     if(cart == null){
             cart  = new Cart();
        }

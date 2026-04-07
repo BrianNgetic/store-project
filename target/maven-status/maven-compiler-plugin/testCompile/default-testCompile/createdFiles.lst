@@ -1,0 +1,7 @@
+com\storeproject\service\user\UserServiceTest.class
+com\storeproject\service\cart\CartServiceTest.class
+com\storeproject\service\Order\CheckoutServiceTest.class
+com\storeproject\controller\ProductControllerTest.class
+com\storeproject\repository\ProductRepositoryTest.class
+com\storeproject\repository\UserRepositoryTest.class
+com\storeproject\service\product\ProductServiceTest.class
