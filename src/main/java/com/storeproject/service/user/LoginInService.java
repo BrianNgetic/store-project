@@ -9,7 +9,7 @@ import com.storeproject.repository.*;
 @Service
 public class LoginInService implements UserDetailsService {
 
-    UsersRepository userRepository;
+   private final  UsersRepository userRepository;
 
     public LoginInService(UsersRepository userRepository) {
         this.userRepository = userRepository;

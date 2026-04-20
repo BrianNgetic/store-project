@@ -59,7 +59,7 @@ public class ProductService {
 
 
         //admin
-        public void  addProduct(List<CreatedProduct> req) throws Exception {
+        public void  addProduct(List<CreatedProduct> req) throws RuntimeException {
             for(CreatedProduct p: req){
                     productRepository.save(productMapper.FromDtoToProduct(p));
              }
@@ -72,7 +72,7 @@ public class ProductService {
 
 
         //customer , hence why we reutrn a dto 
-        public CreatedProduct  viewProductById(Long Id) throws Exception{
+        public CreatedProduct  viewProductById(Long Id) throws RuntimeException{
             
             if(!productRepository.existsById(Id)){
             throw new ProductNotFoundException();
@@ -86,7 +86,7 @@ public class ProductService {
 
         }
     //admin
-      public List<CreatedProduct> viewByCategory(String category) throws Exception{
+      public List<CreatedProduct> viewByCategory(String category) throws RuntimeException{
       
          if(!validCategory(category)){
                 throw new invalidProductCategoryException();
@@ -106,7 +106,7 @@ public class ProductService {
     }
       
     //admin
-        public List<CreatedProduct> viewAllProducts() throws Exception{
+        public List<CreatedProduct> viewAllProducts() throws RuntimeException{
             List<Product> results = new ArrayList<>();
             results.addAll(productRepository.findAll());
             
@@ -126,7 +126,7 @@ public class ProductService {
 
         //admin
         @Transactional
-        public Product  updatedProduct(Long Prod_id,  CreatedProduct req) throws Exception{
+        public Product  updatedProduct(Long Prod_id,  UpdateProductDto req) throws RuntimeException{
          
         if(!productRepository.existsById(Prod_id)){
                 throw  new ProductNotFoundException();
@@ -149,7 +149,7 @@ public class ProductService {
 
 
           //admin
-        public void deleteProduct(Long id) throws Exception{
+        public void deleteProduct(Long id) throws RuntimeException{
 
             
             if(productRepository.existsById(id)){

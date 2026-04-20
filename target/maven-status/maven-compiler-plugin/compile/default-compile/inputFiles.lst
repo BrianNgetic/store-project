@@ -1,6 +1,5 @@
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\dto\NutritionDto.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\Exceptions\noNutritionInfoException.java
-C:\Users\ngeti\store-project\src\main\java\com\storeproject\service\cart\CartItemService.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\controller\ProductController.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\service\Order\OrderService.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\controller\CheckoutController.java
@@ -8,6 +7,7 @@ C:\Users\ngeti\store-project\src\main\java\com\storeproject\service\product\Prod
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\Exceptions\duplicateProductExpetion.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\controller\LoginController.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\dto\AccessedProductDto.java
+C:\Users\ngeti\store-project\src\main\java\com\storeproject\model\ErrorDetails.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\model\Clothing.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\model\FoodNutrition.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\Exceptions\UserNotFoundException.java
@@ -16,6 +16,7 @@ C:\Users\ngeti\store-project\src\main\java\com\storeproject\model\Users.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\model\Admin.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\dto\AddToCartDto.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\model\Product.java
+C:\Users\ngeti\store-project\src\main\java\com\storeproject\dto\UpdateProductDto.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\repository\ClothingRepository.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\repository\ProductRepository.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\controller\homeController.java
@@ -31,12 +32,12 @@ C:\Users\ngeti\store-project\src\main\java\com\storeproject\controller\Registrat
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\dto\RegistrationDTO.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\model\Exceptions\StockTrackable.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\repository\OrderRepository.java
-C:\Users\ngeti\store-project\src\main\java\com\storeproject\service\Order\OrderItemService.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\service\Payment\PaymentService.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\Exceptions\OrderNotFoundException.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\Application.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\config\DatabaseConfig.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\model\OrderItem.java
+C:\Users\ngeti\store-project\src\main\java\com\storeproject\dto\ElectronicResponseDTO.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\model\Food.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\model\Electronics.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\Exceptions\invalidProductCategoryException.java
@@ -49,8 +50,11 @@ C:\Users\ngeti\store-project\src\main\java\com\storeproject\controller\CartContr
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\controller\UserController.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\model\Cart.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\dto\CartSummaryDTO.java
+C:\Users\ngeti\store-project\src\main\java\com\storeproject\dto\ClothingResponseDTO.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\service\user\UserService.java
+C:\Users\ngeti\store-project\src\main\java\com\storeproject\Exceptions\GlobalExceptionHandler.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\Exceptions\noProductsFoundException.java
+C:\Users\ngeti\store-project\src\main\java\com\storeproject\dto\FoodResponseDTO.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\dto\GetCartSummaryDto.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\repository\UsersRepository.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\Exceptions\ProductNotFoundException.java

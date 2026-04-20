@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import com.storeproject.dto.CreatedProduct;
+import com.storeproject.dto.UpdateProductDto;
 import com.storeproject.model.*;
 import com.storeproject.service.product.*;
 // import com.storeproject.service.product.AddProductServiceInterfaceImplementation;
@@ -47,7 +48,7 @@ public class ProductController {
     }
 
     @PutMapping("/update-product/{id}") //update a product
-    public ResponseEntity<?> UpdateProduct(@PathVariable Long id, @RequestBody CreatedProduct product){
+    public ResponseEntity<?> UpdateProduct(@PathVariable Long id, @RequestBody UpdateProductDto product){
                 //pathvariable binds the requested paremeter of the handler method to the url making it dynamic 
             try{
             productService.updatedProduct(id, product);

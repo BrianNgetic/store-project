@@ -2,7 +2,7 @@ package com.storeproject.Exceptions;
 
 
 
-public class outOfStockException extends Exception{
+public class outOfStockException extends RuntimeException{
     public outOfStockException(){
         super("This item is out of Stock");
     }

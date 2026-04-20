@@ -1,6 +1,6 @@
 package com.storeproject.Exceptions;
 
-public class invalidProductCategoryException extends Exception {
+public class invalidProductCategoryException extends RuntimeException {
         public invalidProductCategoryException(){
             super("Invalid Category: Please Enter a Valid Category(Food, Electronic, Clothing)");
 

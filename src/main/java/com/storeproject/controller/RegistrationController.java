@@ -3,6 +3,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import com.storeproject.repository.*;
+
+import jakarta.validation.Valid;
+
 import com.storeproject.dto.RegistrationDTO;
 import com.storeproject.model.*;
 
@@ -26,10 +29,9 @@ public class RegistrationController{
     }
 
     @PostMapping
-    public String processRegistration(@ModelAttribute RegistrationDTO registrationDTO){
+    public String processRegistration(@ModelAttribute @Valid RegistrationDTO registrationDTO){
     //    User user = registrationDTO.CreateUser(passwordEncoder);
-       System.out.println("this hit");
-       System.out.println(registrationDTO);
+    
        Users CreatedUser = registrationDTO.CreateUser(passwordEncoder);
     
        userRepository.save(CreatedUser);

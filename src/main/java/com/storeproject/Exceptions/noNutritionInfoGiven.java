@@ -1,6 +1,6 @@
 package com.storeproject.Exceptions;
 
-public class noNutritionInfoGiven  extends Exception{
+public class noNutritionInfoGiven  extends RuntimeException{
 
     public noNutritionInfoGiven()
 {

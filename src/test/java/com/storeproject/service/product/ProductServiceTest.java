@@ -28,6 +28,8 @@ import com.storeproject.Exceptions.noProductsFoundException;
 import com.storeproject.Exceptions.ProductNotFoundException;
 import com.storeproject.model.*;
 import com.storeproject.dto.CreatedProduct;
+import com.storeproject.dto.UpdateProductDto;
+import com.storeproject.dto.*;
 import com.storeproject.dto.NutritionDto;
 import com.storeproject.mapping.ProductMapper;
 
@@ -58,11 +60,13 @@ public class ProductServiceTest {
    
 
     //dtos
-    CreatedProduct clothing =  new CreatedProduct();
-    CreatedProduct fakeClothing = new CreatedProduct();
-    CreatedProduct electronics = new CreatedProduct();
-    CreatedProduct food  = new CreatedProduct();
+    UpdateProductDto updateProductDto = new UpdateProductDto();
+    ClothingResponseDTO clothingDTO=  new ClothingResponseDTO();
+    UpdateProductDto fakeClothingUpdateDto= new UpdateProductDto(); //has a wrong category.
+    ElectronicResponseDTO electronicDTO= new ElectronicResponseDTO();
+    FoodResponseDTO foodDTO  = new FoodResponseDTO();
     NutritionDto foodNutrition = new NutritionDto();
+    UpdateProductDto newUpdatedElectronicDTO  = new UpdateProductDto();
 
     //Regular entityclass
     Clothing otherClothing = new Clothing();
@@ -82,7 +86,7 @@ public class ProductServiceTest {
 
 
         productService = new ProductService(clothingRepository, electronicsRepository, foodRepository, productMapper, productRepository);
-        clothing = CreatedProduct.builder()
+        clothingDTO = ClothingResponseDTO.builder()
                .name( "North Face Puffer Jacket")
                 .category("Clothing")
                 .type("jacket")
@@ -92,7 +96,7 @@ public class ProductServiceTest {
                 .clothColor("Blue")
                 .build();
 
-            fakeClothing =  CreatedProduct.builder()
+        fakeClothingUpdateDto =  UpdateProductDto.builder() //should throw invalid category
                .name( "North Face Puffer Jacket")
                 .category("fakeCategory")
                 .type("jacket")
@@ -103,7 +107,7 @@ public class ProductServiceTest {
                 .build();
         
 
-        electronics = CreatedProduct.builder()
+        electronicDTO = ElectronicResponseDTO.builder()
                     .name("Samsung Galaxy S23")
                     .category("Electronic")
                     .type("phone")
@@ -119,7 +123,7 @@ public class ProductServiceTest {
                 14,
                 29,
                 13);
-        food = CreatedProduct.builder()
+        foodDTO = FoodResponseDTO.builder()
             .name("Almond Butter Jar")
             .category("Food")
             .type("grocery")
@@ -162,7 +166,7 @@ public class ProductServiceTest {
 
         
     
-        List<CreatedProduct>   allProductDTosToBeSaved = List.of(electronics, food, clothing);
+        List<CreatedProduct>   allProductDTosToBeSaved = List.of(electronicDTO, foodDTO, clothingDTO);
     
     
         ArgumentCaptor<Product> ProductCaptor = 
@@ -262,7 +266,7 @@ public class ProductServiceTest {
        */
        
        //updated dto  ..chaning price to 144.99
-        CreatedProduct newUpdatedElectronicDTO = CreatedProduct.builder()
+        newUpdatedElectronicDTO = UpdateProductDto.builder()
                     .name("Samsung Galaxy S23")
                     .category("Electronic")
                     .type("phone")
@@ -316,7 +320,7 @@ public class ProductServiceTest {
 
       
 
-        assertThrows(ProductNotFoundException.class, () -> productService.updatedProduct(Id, clothing));
+        assertThrows(ProductNotFoundException.class, () -> productService.updatedProduct(Id, fakeClothingUpdateDto ));
 
        
     }
@@ -332,7 +336,7 @@ public class ProductServiceTest {
         // when(productRepository.getReferenceById(otherId)).thenReturn(otherClothing);
 
 
-        assertThrows(invalidProductCategoryException.class, () -> productService.updatedProduct(otherId, fakeClothing));
+        assertThrows(invalidProductCategoryException.class, () -> productService.updatedProduct(otherId, fakeClothingUpdateDto ));
 
     }
 

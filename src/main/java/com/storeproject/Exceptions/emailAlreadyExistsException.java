@@ -2,7 +2,7 @@ package com.storeproject.Exceptions;
 
 
 
-public class emailAlreadyExistsException  extends Exception{
+public class emailAlreadyExistsException  extends RuntimeException{
 
     public emailAlreadyExistsException(){
         super("Sorry, this Email is already in use");

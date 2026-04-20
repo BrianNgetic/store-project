@@ -1,6 +1,6 @@
 package com.storeproject.Exceptions;
 
-public class noNutritionInfoException  extends Exception{
+public class noNutritionInfoException  extends RuntimeException{
     public noNutritionInfoException(){
         super("No nutrion information available");
     }

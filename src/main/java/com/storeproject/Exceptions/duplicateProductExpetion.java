@@ -1,6 +1,6 @@
 package com.storeproject.Exceptions;
 
-public class duplicateProductExpetion  extends Exception{
+public class duplicateProductExpetion  extends RuntimeException{
     public duplicateProductExpetion(){
         super("duplicate products found");
     }

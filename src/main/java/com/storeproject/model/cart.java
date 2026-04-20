@@ -26,7 +26,9 @@ public class Cart {
     @JoinColumn(name = "user_id")
     protected Users user;
     
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cart",
+             cascade = CascadeType.ALL,
+             orphanRemoval = true)
     private List<CartItem> userCartItems = new ArrayList<>();
 
     public void addToUserCart(CartItem cartItem){
@@ -42,7 +44,15 @@ public class Cart {
         return false;
     }
 
-    
+   public CartItem getCartItemByProduct(Product product){
+
+            return userCartItems.stream()
+                .filter(item -> item.getProduct().equals(product))
+                .findFirst()
+                .orElse(null);
+}
+
+   
 
     public void deleteFromUserCart(CartItem cartItem){
         if(userCartItems.contains(cartItem)){

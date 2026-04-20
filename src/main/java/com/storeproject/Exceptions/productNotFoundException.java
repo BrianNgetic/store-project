@@ -1,6 +1,6 @@
 package com.storeproject.Exceptions;
 
-public class ProductNotFoundException extends Exception{
+public class ProductNotFoundException extends RuntimeException{
 
     public ProductNotFoundException(){
         super("Sorry, product not found");

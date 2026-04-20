@@ -27,53 +27,52 @@ public class OrderService{
 
     private final UsersRepository usersRepository;
     private final CartRepository cartRepository;
-    private final CartItemRepository cartItemRepository;
-    private final OrderItemRepository orderItemRepository;
     private final OrderRepository orderRepository;
-    private final OrderItemService orderItemService;
     private final ProductRepository productRepository;
     // private final PaymentService paymentService;
 
     public OrderService(UsersRepository usersRepository,
                         CartRepository cartRepository,
-                        CartItemRepository cartItemRepository,
                         OrderRepository orderRepository,
-                        OrderItemRepository orderItemRepository,
-                        OrderItemService  orderItemService,
                         ProductRepository productRepository
 
                        ){
         this.usersRepository = usersRepository;
         this.cartRepository = cartRepository;
-         this.cartItemRepository  = cartItemRepository;
         this.orderRepository = orderRepository;
-        this.orderItemRepository  = orderItemRepository;
-        this.orderItemService = orderItemService;
         this.productRepository = productRepository;
         // this.paymentService = paymentService;
        
     }
 
+Users getCurrentUser() throws RuntimeException {
+             //get the current user
+             Authentication auth = SecurityContextHolder.getContext().getAuthentication() ;
+            String username= auth.getName();
+
+
+            Users user = usersRepository.findByUsername(username).
+                                            orElseThrow(() -> new UserNotFoundException("Username not found"));
+
+            return user;
+}
+    
+
+
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void  checkout() throws Exception{
-       Authentication auth = SecurityContextHolder.getContext().getAuthentication() ;
-        String username= auth.getName();
-        
-        
-        Users user = usersRepository.findByUsername(username).orElseThrow( () -> new UserNotFoundException());
-        //get the current users cart
-        Cart cart  = cartRepository.findByUser(user);
+    public void  checkout() throws RuntimeException{
+       
+        //get the users cart
+        Cart cart  = cartRepository.findByUser(getCurrentUser());
 
-        //create a new order, and move all th
-
+        
+        //create a new order
         Order order  = new Order();
-        order.setUser(user);
+        order.setUser(getCurrentUser());
         order.setOrderDate(LocalDateTime.now());
         order.setTotal(cart.getTotal());
-        order.setAddress(user.getAddress());
-        orderRepository.save(order);
-    
-     
+        order.setAddress(getCurrentUser().getAddress());
+        // orderRepository.save(order);
       
         //get the cart items
         List<CartItem> thisUsersCartItems =  cart.getUserCartItems();
@@ -81,22 +80,25 @@ public class OrderService{
         //for each, convert to orderitem
       
         for(CartItem item: thisUsersCartItems){
-            //convert each cartItem to an orderItem and save it
-           orderItemService.createOrderItem(order, item);
-
+    
                 OrderItem orderItem = new OrderItem();
                 orderItem.setOrder(order);
                 orderItem.setProduct(item.getProduct());
                 orderItem.setQuantity(item.getQuantity());
                 orderItem.setPriceAtPurchase(item.getProduct().getPrice());
-                orderItemRepository.save(orderItem);
+            
+
                 if(orderItem.getQuantity() > orderItem.getProduct().getStock()){
                         throw new outOfStockException();
                 }
         }
 
+      
+
         //before going through with payment processing
         order.setStatus(Status.pending);
+
+        orderRepository.save(order);
 
 
         //only for simulation before adding actual payment methods
@@ -115,20 +117,7 @@ public class OrderService{
          Random gen = new Random();
         thisPayment.setUUID(gen.nextLong());
 
-        // paymentService.processPayment(order,thisPayment);
-
-        // if(thisPayment.getStatus() == Payment.Status.SUCCESS){
-        // if(order.getTotal() > 0){
-        //     order.setStatus(Status.paid);
-
-        
-        
-
-        // }
-        // else{
-        //     order.setStatus(Status.cancelled);
-        // }
-
+      //jus for testing, 
         order.setStatus(Status.paid);
         
         //once the payment goes through
@@ -139,15 +128,14 @@ public class OrderService{
                );
                product.setStock(product.getStock() - item.getQuantity());
                
+               cart.deleteFromUserCart(item);
                 
             }
-               cartItemRepository.deleteAll(thisUsersCartItems);
-                cart.getUserCartItems().clear(); 
+               
 
         }
         
-        
-        //after payment  clear the cart and the cartItems
+    
         
         
         

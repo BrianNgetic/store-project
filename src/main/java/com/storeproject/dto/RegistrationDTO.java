@@ -2,6 +2,9 @@ package com.storeproject.dto;
 
 import lombok.*;
 import com.storeproject.model.Users;
+
+import jakarta.validation.constraints.*;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Getter
@@ -10,13 +13,28 @@ public class RegistrationDTO {
 
     PasswordEncoder passwordEncoder;
     
+      @NotBlank(message =  "Username cannot be empty")
       String username;
+
+      @NotBlank
       String password;
+
+      @NotBlank
       String fullname;
+
+      @Email
       String email;
+
+      @NotBlank
       String address;
+
+      @NotBlank
       String city;
+
+      @NotBlank
       String state;
+
+      @NotBlank
       String zip;
 
 

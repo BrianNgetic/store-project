@@ -40,9 +40,10 @@ public class Order {
     @OneToOne(mappedBy = "order")
     protected Payment payment;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<OrderItem> userOrderItems;
-
+    @OneToMany(mappedBy = "order",
+                 cascade = CascadeType.ALL,
+                  orphanRemoval = true)
+    private List<OrderItem> userOrderItems = new ArrayList<>();
 
 
     

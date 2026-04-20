@@ -9,14 +9,10 @@ import com.storeproject.repository.*;
 public class LoginController {
     
     public UsersRepository userRepository;
-
-    // public LoginController(UserRepository userRepository){
-    //     this.userRepository = userRepository;
-    // }
-
+    
     @GetMapping
     public String loginForm(){
-        System.err.println("this also hit");
+      
         return "login";
     }
 }

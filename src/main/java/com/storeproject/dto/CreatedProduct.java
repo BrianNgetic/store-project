@@ -3,39 +3,39 @@ package com.storeproject.dto;
 // import com.storeproject.model.*;
 // import com.storeproject.model.FoodNutrition;
 import java.time.LocalDate;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
+
 
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreatedProduct {
 
     // common
-   
+    @NotBlank
     private String name;
-    private String category;
-    private String type;
-    private double price;
-    private int stock;
-
-    // food (optional)
-    private LocalDate expiryDate;
-    private NutritionDto foodNutrition;
-
-    // nutrition can be another object and be null
-
-    // electronics (optional)
-    private Boolean warrantyEligible;
-    private Integer warrantyPeriod;
-    private Double productVersion;
-    private Integer updatedProductVersion;
-
-    // clothing (optional)
     
-    private String clothSize;
-    private String clothColor;
-  
+    @NotBlank
+    private String category;
+
+    @NotBlank
+    private String type;
+
+    @NotBlank
+    @Positive
+    private Double price;
+
+    @PositiveOrZero
+    private Integer stock;
+
+
+
     // getters & setters
 }
