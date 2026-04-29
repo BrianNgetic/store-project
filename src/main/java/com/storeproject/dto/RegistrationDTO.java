@@ -17,6 +17,7 @@ public class RegistrationDTO {
       String username;
 
       @NotBlank
+      @Size(min = 5 , max = 10)
       String password;
 
       @NotBlank

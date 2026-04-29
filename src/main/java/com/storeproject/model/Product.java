@@ -23,12 +23,15 @@ public abstract class Product {
     
 
     @Column(name = "prodName", nullable  = false)
+    @NotNull
     protected String name;
   
      @Column (name = "prodCategory", nullable = false)
+     @NotNull
     protected String category;
      
     @Column (name = "prodType" ,nullable = false)
+    @NotNull
     protected String type;
 
     
@@ -36,10 +39,12 @@ public abstract class Product {
 
     @Column (name = "prodPrice", nullable = false)
     @Min(value = 0, message =  "Price can not be a negative")
+    @NotNull
     protected double  price;
 
     @Column (name = "prodStock" ,nullable = false)
     @Min(value = 0, message =  "Stock can not be a negative")
+    @NotNull
     protected int stock;
 
     //to maintain isolation(optimistic lock)

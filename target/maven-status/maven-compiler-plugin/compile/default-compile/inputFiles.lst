@@ -11,11 +11,13 @@ C:\Users\ngeti\store-project\src\main\java\com\storeproject\model\ErrorDetails.j
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\model\Clothing.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\model\FoodNutrition.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\Exceptions\UserNotFoundException.java
+C:\Users\ngeti\store-project\src\main\java\com\storeproject\validation\UpdateGroup.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\Exceptions\emailAlreadyExistsException.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\model\Users.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\model\Admin.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\dto\AddToCartDto.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\model\Product.java
+C:\Users\ngeti\store-project\src\main\java\com\storeproject\validation\CreateGroup.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\dto\UpdateProductDto.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\repository\ClothingRepository.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\repository\ProductRepository.java

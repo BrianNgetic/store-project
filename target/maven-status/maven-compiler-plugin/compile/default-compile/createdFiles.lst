@@ -22,6 +22,7 @@ com\storeproject\service\user\LoginInService.class
 com\storeproject\model\Electronics.class
 com\storeproject\controller\RegistrationController.class
 com\storeproject\dto\GetCartSummaryDto.class
+com\storeproject\validation\UpdateGroup.class
 com\storeproject\dto\FoodResponseDTO$FoodResponseDTOBuilder.class
 com\storeproject\dto\ClothingResponseDTO$ClothingResponseDTOBuilderImpl.class
 com\storeproject\model\CartItem.class
@@ -61,6 +62,7 @@ com\storeproject\dto\UpdateProductDto.class
 com\storeproject\Exceptions\noProductsFoundException.class
 com\storeproject\config\DatabaseConfig.class
 com\storeproject\dto\AddToCartDto.class
+com\storeproject\validation\CreateGroup.class
 com\storeproject\Exceptions\emailAlreadyExistsException.class
 com\storeproject\Exceptions\outOfStockException.class
 com\storeproject\dto\AccessedProductDto.class

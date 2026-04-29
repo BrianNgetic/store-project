@@ -8,13 +8,18 @@ xmlns:th="http://www.thymeleaf.org">
 <body>
 <h1>Register</h1>
 
-        <form th:action="@{/register}" action ="/register" method="post" id = "registerForm">
+       <form th:action="@{/register}" method="post" th:object="${user}">
 
             <label>Username</label>
-            <input type="text" name="username" required>
+            <input type="text" th:field="*{username}" required>
 
             <label>Password</label>
-            <input type="password" name="password" required>
+            <input type="password" th:field="*{password}" />
+            <div th:if="${#fields.hasErrors('password')}"
+                th:errors="*{password}">
+            </div>
+
+
 
             <label>Confirm Password</label>
             <input type="password" name="confirm" required>

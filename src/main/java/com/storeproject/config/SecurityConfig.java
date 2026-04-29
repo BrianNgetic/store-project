@@ -27,9 +27,9 @@ public class SecurityConfig {
                 "/css/**",
                 "/js/**",
                 "/images/**").permitAll()
-            .requestMatchers(HttpMethod.PUT, "/update-product/*").hasAuthority("ADMIN")
-            .requestMatchers(HttpMethod.DELETE, "/delete-product/*").hasAuthority("ADMIN")
-            .requestMatchers(HttpMethod.POST , "product/add-product/*").hasAnyAuthority("ADMIN")
+            .requestMatchers(HttpMethod.PUT, "/product/update-product/**").hasAuthority("ROLE_ADMIN")
+            .requestMatchers(HttpMethod.DELETE, "/product/delete-product/**").hasAuthority("ROLE_ADMIN")
+            .requestMatchers(HttpMethod.POST , "/product/add-product/**").hasAnyAuthority("ROLE_ADMIN")
            .requestMatchers(HttpMethod.GET, "/register").permitAll()
             .requestMatchers(HttpMethod.POST, "/register").permitAll()
             
@@ -43,6 +43,12 @@ public class SecurityConfig {
                 .permitAll()
 
             )
+            .exceptionHandling(ex -> ex.accessDeniedHandler(
+                (req, res, e) ->{
+                    res.setStatus(403);
+                    res.getWriter().write("Admin priviledges required");
+                })
+                )
             .logout(logout -> logout.permitAll());
 
             return http.build();
