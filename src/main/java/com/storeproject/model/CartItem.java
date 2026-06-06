@@ -24,13 +24,11 @@ public class CartItem {
     @Column(name = "id")
     protected Long id;
 
-    
 
     @ManyToOne
     @JoinColumn(name  = "prodId")
     protected Product product;
     
-
 
     @ManyToOne
     @JoinColumn(name = "cart_id")
@@ -40,7 +38,5 @@ public class CartItem {
     protected int quantity;
 
 
-
-    
-    
+  
 }

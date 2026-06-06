@@ -3,8 +3,8 @@ package com.storeproject.dto;
 import com.storeproject.model.*;
 import lombok.*;
 
-@Getter
-@Setter
+// @Getter
+// @Setter
 @NoArgsConstructor
 public class AddToCartDto {
     
@@ -19,7 +19,7 @@ public Long getId(){
 public  int getQuantity(){
     return this.Quantity;
 }
-public void setQuantity(int  quantity){
-    this.Quantity = quantity;
+public void setQuantity(int  Quantity){
+    this.Quantity = Quantity;
 }
 }

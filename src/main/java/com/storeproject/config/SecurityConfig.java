@@ -1,19 +1,25 @@
 package com.storeproject.config;
 
+
 import org.springframework.context.annotation.Bean;
-// /import org.springframework.beans.factory.annotation.Configurable;
+//import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.*;
+
+
 @Configuration
 public class SecurityConfig {
     @Bean
      public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 
 
   @Bean
@@ -32,24 +38,27 @@ public class SecurityConfig {
             .requestMatchers(HttpMethod.POST , "/product/add-product/**").hasAnyAuthority("ROLE_ADMIN")
            .requestMatchers(HttpMethod.GET, "/register").permitAll()
             .requestMatchers(HttpMethod.POST, "/register").permitAll()
-            
+            .requestMatchers("/error").permitAll()
             .anyRequest().authenticated()
             )
             .formLogin(form -> form
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/home", true)
                 .failureUrl("/login?error")
                 .permitAll()
+              
 
             )
+            
+            .formLogin(Customizer.withDefaults())
             .exceptionHandling(ex -> ex.accessDeniedHandler(
                 (req, res, e) ->{
                     res.setStatus(403);
                     res.getWriter().write("Admin priviledges required");
                 })
                 )
-            .logout(logout -> logout.permitAll());
+            .logout(logout -> logout.permitAll())
+        ;
 
             return http.build();
 

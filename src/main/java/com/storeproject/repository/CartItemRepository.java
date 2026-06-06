@@ -4,7 +4,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.storeproject.model.CartItem;
 import com.storeproject.model.*;
-import java.util.*;
+
 import java.util.List;
 
 

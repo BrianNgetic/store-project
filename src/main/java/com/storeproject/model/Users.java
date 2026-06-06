@@ -46,6 +46,9 @@ public class Users implements UserDetails{
   @Column(name = "zip")
   public String zip;
 
+  @Column(name  = "role")
+  public String Role;
+
 
   public Users (
       String username,

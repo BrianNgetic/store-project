@@ -1,20 +1,19 @@
 package com.storeproject.service.Order;
 
 import java.time.LocalDateTime;
-
-import java.time.LocalDateTime;
-
 import  org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import com.storeproject.*;
+
+
+
 import com.storeproject.model.*;
 import com.storeproject.model.Order.Status;
 import com.storeproject.Exceptions.*;
 import com.storeproject.repository.*;
-import com.storeproject.service.Payment.*;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,18 +44,26 @@ public class OrderService{
        
     }
 
-Users getCurrentUser() throws RuntimeException {
+Users getCurrentUser() throws RuntimeException{
              //get the current user
              Authentication auth = SecurityContextHolder.getContext().getAuthentication() ;
-            String username= auth.getName();
+        
 
-
-            Users user = usersRepository.findByUsername(username).
-                                            orElseThrow(() -> new UserNotFoundException("Username not found"));
-
-            return user;
-}
+             Object principal  = auth.getPrincipal();
+    String username;
+            if(principal instanceof UserDetails){
+                     username = ((UserDetails) principal).getUsername();
+             } else {
+               username = principal.toString();
+            }
+    if(usersRepository.findByUsername(username).isPresent()){
+        return usersRepository.findByUsername(username).get();
+    }
     
+
+    throw new UserNotFoundException("No authenticated user");
+}
+
 
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
@@ -78,7 +85,7 @@ Users getCurrentUser() throws RuntimeException {
         List<CartItem> thisUsersCartItems =  cart.getUserCartItems();
 
         //for each, convert to orderitem
-      
+      List<OrderItem> newOrders = new ArrayList<>();
         for(CartItem item: thisUsersCartItems){
     
                 OrderItem orderItem = new OrderItem();
@@ -91,15 +98,19 @@ Users getCurrentUser() throws RuntimeException {
                 if(orderItem.getQuantity() > orderItem.getProduct().getStock()){
                         throw new outOfStockException();
                 }
+
+                
+                newOrders.add(orderItem);
+
         }
 
+        newOrders.forEach(tempOrder -> order.addToUserOrder(tempOrder));
       
 
         //before going through with payment processing
         order.setStatus(Status.pending);
 
         orderRepository.save(order);
-
 
         //only for simulation before adding actual payment methods
         String paymentMethod = "1111 2222 3333 4444";
@@ -122,24 +133,34 @@ Users getCurrentUser() throws RuntimeException {
         
         //once the payment goes through
         if(order.getStatus() == Status.paid){
+            
+            List<CartItem> toBeDeleted = new ArrayList<>();
+            
             for(CartItem item: thisUsersCartItems){
                Product product = productRepository.findByIdForUpdates(
                 item.getProduct().getId()
                );
+         
                product.setStock(product.getStock() - item.getQuantity());
                
-               cart.deleteFromUserCart(item);
+               toBeDeleted.add(item);
+       
                 
             }
+                //got a concurrentModificationException before i added this
+                toBeDeleted.forEach(temp -> cart.deleteFromUserCart(temp));
                
 
         }
-        
+      
     
         
         
-        
-}
+
+
+    }
+
+
 
 
 

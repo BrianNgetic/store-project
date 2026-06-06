@@ -1,3 +1,4 @@
+C:\Users\ngeti\store-project\src\main\java\com\storeproject\config\TestDataConfig.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\dto\NutritionDto.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\Exceptions\noNutritionInfoException.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\controller\ProductController.java
@@ -58,6 +59,7 @@ C:\Users\ngeti\store-project\src\main\java\com\storeproject\Exceptions\GlobalExc
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\Exceptions\noProductsFoundException.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\dto\FoodResponseDTO.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\dto\GetCartSummaryDto.java
+C:\Users\ngeti\store-project\src\main\java\com\storeproject\security\FakeAuthFilter.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\repository\UsersRepository.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\Exceptions\ProductNotFoundException.java
 C:\Users\ngeti\store-project\src\main\java\com\storeproject\repository\ElectronicsRepository.java

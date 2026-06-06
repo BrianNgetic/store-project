@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.storeproject.service.product.ProductService;
 import com.storeproject.model.*;
@@ -42,17 +43,34 @@ public class CartService {
          
     }
 
+
 Users getCurrentUser() throws RuntimeException{
              //get the current user
-             Authentication auth = SecurityContextHolder.getContext().getAuthentication() ;
-            String username= auth.getName();
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication() ;
+        
+            if (auth == null || !auth.isAuthenticated() || "anonymousUser".equals(auth.getPrincipal())) {
+                    throw new RuntimeException("No authenticated user found in session.");
+                }
 
+             Object principal  = auth.getPrincipal();
+            String username;
+            if(principal instanceof UserDetails){
+                     username = ((UserDetails) principal).getUsername();
+             } else if(principal != null) {
+               username = principal.toString();
+            } else {
+              throw new RuntimeException("Authentication principal is missing.");
+             }
 
-            Users user = usersRepository.findByUsername(username).
-                                            orElseThrow(() -> new UserNotFoundException("Username not found"));
+    if(usersRepository.findByUsername(username).isPresent()){
+        return usersRepository.findByUsername(username).get();
+    }
+    
 
-            return user;
+    throw new UserNotFoundException("No authenticated user");
 }
+
+
     
 
 @Transactional 
@@ -64,6 +82,7 @@ Users getCurrentUser() throws RuntimeException{
         
             if(cart == null){
                     cart  = new Cart();
+                    cart.setUser(getCurrentUser());
             }
                 
                 //create the cart item 
@@ -82,8 +101,8 @@ Users getCurrentUser() throws RuntimeException{
 
             //save the cart and cartItem to db
             //apperantly I dont even need to do this as it inside a 
-            //mannaged transactional method
-            //   cartRepository.save(cart)
+            //mannaged transactional method   but since there is a possibility the cart might be null ill do it anyway
+              cartRepository.save(cart);
 
 }
 

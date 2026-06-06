@@ -5,6 +5,7 @@ com\storeproject\dto\ElectronicResponseDTO$ElectronicResponseDTOBuilder.class
 com\storeproject\dto\ElectronicResponseDTO.class
 com\storeproject\model\Payment$Status.class
 com\storeproject\service\Payment\PaymentService.class
+com\storeproject\Exceptions\GlobalExceptionHandler.class
 com\storeproject\dto\ElectronicResponseDTO$ElectronicResponseDTOBuilderImpl.class
 com\storeproject\model\Food.class
 com\storeproject\repository\CartItemRepository.class
@@ -36,15 +37,18 @@ com\storeproject\controller\homeController.class
 com\storeproject\Exceptions\noNutritionInfoException.class
 com\storeproject\dto\CreatedProduct$CreatedProductBuilderImpl.class
 com\storeproject\model\Clothing.class
+com\storeproject\config\TestDataConfig.class
 com\storeproject\service\cart\CartService.class
 com\storeproject\dto\CreatedProduct.class
 com\storeproject\controller\CartController.class
 com\storeproject\Exceptions\OrderNotFoundException.class
+com\storeproject\model\ErrorDetails.class
 com\storeproject\dto\ClothingResponseDTO$ClothingResponseDTOBuilder.class
 com\storeproject\dto\UpdateProductDto$UpdateProductDtoBuilder.class
 com\storeproject\model\Payment.class
 com\storeproject\dto\NutritionDto$NutritionDtoBuilder.class
 com\storeproject\model\OrderItem.class
+com\storeproject\security\FakeAuthFilter.class
 com\storeproject\controller\CheckoutController.class
 com\storeproject\repository\UsersRepository.class
 com\storeproject\config\SecurityConfig.class
